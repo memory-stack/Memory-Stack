@@ -1,0 +1,142 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,200&display=swap'); */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+
+:root {
+  --clr-primary: white;
+  --clr-fade: #c8c8c8;
+  --clr-bg: #1a1a1a;
+  --clr-accent: #a772ff;
+
+  --fs-xl: clamp(3.5rem, 3vw + 1rem, 12rem);
+  --fs-heading: 1.25rem;
+  --fs-body: 1rem;
+}
+
+* {
+  margin: 0px;
+  background-color: var(--clr-bg);
+  font-family: "Poppins";
+}
+
+body {
+  padding: 0px 8.5%;
+}
+
+a {
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.body {
+  margin: 0 auto;
+  max-width: 50rem;
+  padding: 6.25rem 17%;
+}
+
+/* FONTS */
+
+.headline {
+  font-size: var(--fs-xl);
+  color: var(--clr-primary);
+  font-weight: 500;
+  line-height: 118%;
+  margin-bottom: 2.5rem;
+}
+
+.bodyText {
+  font-size: var(--fs-body);
+  color: var(--clr-primary);
+  font-weight: 400;
+}
+
+.bodyTextFaded {
+  font-size: var(--fs-body);
+  color: var(--clr-fade);
+  font-weight: 400;
+}
+
+.heading {
+  font-size: var(--fs-heading);
+  color: var(--clr-primary);
+  margin-bottom: 1.25rem;
+  /* font-weight: 500; */
+}
+
+.headingNopadding {
+  font-size: var(--fs-heading);
+  color: var(--clr-primary);
+  /* margin-bottom: 1.25rem; */
+}
+
+.subHeadline {
+  margin-bottom: 5rem;
+  font-size: var(--fs-body);
+  color: var(--clr-fade);
+}
+
+/* MAIN CSS */
+
+.navbar {
+  position: sticky;
+  max-width: 100rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 0 auto;
+}
+
+.logo {
+  color: var(--clr-primary);
+  display: inline-block;
+}
+
+.buttons {
+  float: right;
+}
+
+.navbarButton {
+  margin-left: 0.5rem;
+}
+
+span {
+  color: var(--clr-accent);
+}
+
+input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid #a1a1a1;
+  display: block;
+  width: 465px;
+  margin-top: 32px;
+}
+
+.button {
+  margin-top: 60px;
+  width: 465px;
+  height: 50px;
+  background: #383838;
+  border-radius: 8px;
+  color: white;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+}
+
+.button:hover {
+  background-color: transparent;
+  border: 1px solid var(--clr-accent);
+}
+
+.link:hover {
+  text-decoration: underline var(--clr-accent);
+  cursor: pointer;
+}
+
+input {
+  color: white;
+}
