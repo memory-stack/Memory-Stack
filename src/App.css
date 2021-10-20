@@ -6,7 +6,7 @@
   --clr-bg: #1a1a1a;
   --clr-accent: #a772ff;
 
-  --fs-xl: clamp(3.5rem, calc(3vw + 1rem) 12rem);
+  --fs-xl: clamp(3.5rem, 3vw, 12rem);
   --fs-heading: 1.25rem;
   --fs-body: 1rem;
 }
