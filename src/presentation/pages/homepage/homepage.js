@@ -14,7 +14,7 @@ function Homepage() {
 
       var tempLogArray = [];
       for (var i = newLogs.length - 1; i >= 0; i--) {
-        if (cnt++ > 20) break;
+        // if (cnt++ > 20) break;
         const log = newLogs[i];
         var time = new Date(log["createdAt"]);
         var date = time.getDate();
