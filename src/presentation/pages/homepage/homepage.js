@@ -10,8 +10,11 @@ function Homepage() {
     const socket = socketIOClient("https://api-memory-stack.herokuapp.com");
     socket.on("recentLogs", (newLogs) => {
       console.log("connection established");
+      var cnt = 0;
+
       var tempLogArray = [];
       for (var i = newLogs.length - 1; i >= 0; i--) {
+        if (cnt++ > 20) break;
         const log = newLogs[i];
         var time = new Date(log["createdAt"]);
         var date = time.getDate();
@@ -50,112 +53,6 @@ function Homepage() {
     });
   }, []);
 
-  // useEffect(() => {
-  //   effect
-  //   return () => {
-  //     cleanup
-  //   }
-  // }, [input])
-
-  // const feed = [
-  //   <Text
-  //     type="homeView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="homeView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="homeView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="homeView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="homeView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="homeView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="homeView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="homeView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="homeView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="homeView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="homeView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="homeView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="homeView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="homeView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="homeView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="homeView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  // ];
-
   return (
     <div>
       <div className="body">
@@ -168,10 +65,14 @@ function Homepage() {
           since the 1500s, when an unknown printer took a galley of type and
           scrambled it to make a type specimen book.
         </p>
-        <div>
-          <p className="heading">RECENT LOGS</p>
-          <div className="logs">{feed}</div>
-        </div>
+        {feed.length ? (
+          <div>
+            <p className="heading">RECENT LOGS</p>
+            <div className="logs">{feed}</div>
+          </div>
+        ) : (
+          <p className="heading">LOADING ...</p>
+        )}
       </div>
     </div>
   );
