@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function postRequest(URI, params) {
   var response = await axios.post(
-    `http://192.168.0.109:3000/api/${URI}`,
+    `https://api-memory-stack.herokuapp.com/api/${URI}`,
     params
   );
   return response.data;
@@ -16,7 +16,7 @@ export async function postRequestLocal(URI, params) {
 
 export async function getRequest(URI) {
   const response = await axios.get(
-    `https://api-codeclock.herokuapp.com/${URI}`
+    `https://api-memory-stack.herokuapp.com/api/${URI}`
   );
 
   return response.data;
