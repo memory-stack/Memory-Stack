@@ -2,7 +2,8 @@ import { useHistory } from "react-router";
 
 function Text(props) {
   const navigator = useHistory();
-  const username = "voidmemories";
+  const username = props.username;
+  const rawDateTime = props.rawDateTime;
   const type = props.type;
   const date = props.date;
   const time = props.time;
@@ -13,7 +14,7 @@ function Text(props) {
     toReturn = (
       <p
         onClick={() => {
-          navigator.push("/voidmemories/logs");
+          navigator.push(`/${username}/${rawDateTime}/logs`);
         }}
         className="bodyText link"
       >
@@ -24,7 +25,7 @@ function Text(props) {
     toReturn = (
       <p
         onClick={() => {
-          navigator.push("/voidmemories/logs");
+          navigator.push(`/${username}/${rawDateTime}/logs`);
         }}
         className="bodyText link"
       >

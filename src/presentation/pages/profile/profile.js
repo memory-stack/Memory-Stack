@@ -15,10 +15,12 @@ function Profile() {
   const [isLoading, finishLoading] = useState(true);
 
   useEffect(async () => {
+    feed = [];
     const res = await getRequest(`user/${username}`);
     bio = res.user.about;
     var thoughts = res.user.thoughts;
     for (let thought of thoughts) {
+      console.log(thought);
       var time = new Date(thought.createdAt);
       var text = thought.thought;
 
@@ -48,6 +50,8 @@ function Profile() {
       feed.push(
         <Text
           type="profileView"
+          rawDateTime={thought["createdAt"]}
+          username={username}
           date={loggedDate}
           time={loggedTime}
           text={text.toUpperCase()}
@@ -56,105 +60,6 @@ function Profile() {
     }
     finishLoading(false);
   }, []);
-
-  // const feed = [
-  //   <Text
-  //     type="profileView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="profileView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="profileView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="profileView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="profileView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="profileView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="profileView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="profileView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="profileView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="profileView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="profileView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="profileView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="profileView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="profileView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="profileView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  //   <Text
-  //     type="profileView"
-  //     date="21 - 06 - 1876"
-  //     time="1400"
-  //     text="STUCK IN THE SEA WITH NOWHERE TO GO."
-  //   ></Text>,
-  // ];
 
   return (
     <div className="body">

@@ -42,7 +42,9 @@ function Homepage() {
 
         tempLogArray.push(
           <Text
+            username={log["creator"]["username"]}
             type="homeView"
+            rawDateTime={log["createdAt"]}
             date={loggedDate}
             time={loggedTime}
             text={log["logMessage"]}
