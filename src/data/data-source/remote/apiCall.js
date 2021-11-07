@@ -3,7 +3,12 @@ import axios from "axios";
 export async function postRequest(URI, params) {
   var response = await axios.post(
     `https://api-memory-stack.herokuapp.com/api/${URI}`,
-    params
+    params,
+    {
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtpZXRoYmVycnlAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ2b2lkIiwiaWF0IjoxNjM1NzQ3NjgzfQ.3c4KzLQf-r1UmcitGO_snznSa0z44b7cdCeQKqNaJ8k`,
+      },
+    }
   );
   return response.data;
 }
