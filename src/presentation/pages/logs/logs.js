@@ -34,11 +34,12 @@ function Logs() {
 
   useEffect(async () => {
     feed = [];
-    console.log(username, date);
+
     const res = await postRequest("logView", {
-      username: "void",
-      date: "2021-11-06T19:58:08.270Z",
+      username: username,
+      date: date,
     });
+    // console.log(res);
     title = res.message.thought[0].thought;
     var logs = res.message.logs;
     for (let log of logs) {
