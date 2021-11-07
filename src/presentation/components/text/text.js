@@ -18,7 +18,7 @@ function Text(props) {
         }}
         className="bodyText link"
       >
-        {date} :: <span>{time} :</span> {text.toUpperCase()}
+        <span>{time} :</span> {text.toUpperCase()}
       </p>
     );
   else if (type == "profileView")
