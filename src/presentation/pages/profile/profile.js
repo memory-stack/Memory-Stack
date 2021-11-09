@@ -19,6 +19,7 @@ function Profile() {
     const res = await getRequest(`user/${username}`);
     bio = res.user.about;
     var thoughts = res.user.thoughts;
+    thoughts.reverse();
     for (let thought of thoughts) {
       console.log(thought);
       var time = new Date(thought.createdAt);
