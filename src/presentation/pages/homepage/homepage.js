@@ -11,8 +11,9 @@ function Homepage() {
     const socket = socketIOClient("https://api-memory-stack.herokuapp.com");
     socket.on("recentLogs", (newLogs) => {
       console.log("connection established");
+      console.log(feed.length);
       var cnt = 0;
-
+      setFeed([]);
       var tempLogArray = [];
       for (var i = newLogs.length - 1; i >= 0; i--) {
         // if (cnt++ > 20) break;
@@ -59,7 +60,7 @@ function Homepage() {
       }
       setFeed(tempLogArray);
     });
-  }, []);
+  }, [setFeed]);
 
   return (
     <div>
@@ -96,7 +97,7 @@ function Homepage() {
             interval={80}
           />
         )}
-        {feed.length != 0 && <Terminal lines={feed} interval={25} />}
+        {feed.length != 0 && <Terminal lines={feed} interval={20} />}
         {/* {feed.length ? (
           <div>
             <p className="heading">RECENT LOGS</p>
