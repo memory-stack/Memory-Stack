@@ -5,39 +5,7 @@ import Terminal from "react-animated-term";
 
 function Homepage() {
   const spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
-  const [feed, setFeed] = useState([
-    {
-      text: "mstak logs",
-      cmd: true,
-    },
-    {
-      text: "✔ Loaded logs",
-      cmd: false,
-      repeat: true,
-      repeatCount: 5,
-      frames: spinner.map(function (spinner) {
-        return {
-          text: spinner + " Loading logs",
-          delay: 40,
-        };
-      }),
-    },
-  ]);
-  // socket.on("recentLogs", (newLogs) => {});
-  // const termLines = [
-  // {
-  //   'text': 'ls',
-  //   'cmd': true
-  // },
-  // {
-  //   'text': 'index.js    package.json    node_modules',
-  //   'cmd': false
-  // },
-  // {
-  //   'text': '',
-  //   'cmd': true
-  // }
-  // ]
+  const [feed, setFeed] = useState([]);
 
   useEffect(() => {
     const socket = socketIOClient("https://api-memory-stack.herokuapp.com");
@@ -105,7 +73,30 @@ function Homepage() {
           since the 1500s, when an unknown printer took a galley of type and
           scrambled it to make a type specimen book.
         </p>
-        <Terminal lines={feed} interval={25} />
+        {feed.length == 0 && (
+          <Terminal
+            lines={[
+              {
+                text: "mstak logs",
+                cmd: true,
+              },
+              {
+                text: "✔ Loaded logs",
+                cmd: false,
+                repeat: true,
+                repeatCount: 5,
+                frames: spinner.map(function (spinner) {
+                  return {
+                    text: spinner + " Loading logs",
+                    delay: 40,
+                  };
+                }),
+              },
+            ]}
+            interval={80}
+          />
+        )}
+        {feed.length != 0 && <Terminal lines={feed} interval={25} />}
         {/* {feed.length ? (
           <div>
             <p className="heading">RECENT LOGS</p>
