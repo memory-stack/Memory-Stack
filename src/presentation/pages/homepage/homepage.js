@@ -1,10 +1,43 @@
 import Text from "../../components/text/text";
 import socketIOClient from "socket.io-client";
 import { useState, useEffect } from "react";
+import Terminal from "react-animated-term";
 
 function Homepage() {
-  const [feed, setFeed] = useState([]);
+  const spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
+  const [feed, setFeed] = useState([
+    {
+      text: "mstak logs",
+      cmd: true,
+    },
+    {
+      text: "✔ Loaded logs",
+      cmd: false,
+      repeat: true,
+      repeatCount: 5,
+      frames: spinner.map(function (spinner) {
+        return {
+          text: spinner + " Loading logs",
+          delay: 40,
+        };
+      }),
+    },
+  ]);
   // socket.on("recentLogs", (newLogs) => {});
+  // const termLines = [
+  // {
+  //   'text': 'ls',
+  //   'cmd': true
+  // },
+  // {
+  //   'text': 'index.js    package.json    node_modules',
+  //   'cmd': false
+  // },
+  // {
+  //   'text': '',
+  //   'cmd': true
+  // }
+  // ]
 
   useEffect(() => {
     const socket = socketIOClient("https://api-memory-stack.herokuapp.com");
@@ -40,16 +73,21 @@ function Homepage() {
 
         const loggedTime = `${logHour}:${logMinute}`;
 
-        tempLogArray.push(
-          <Text
-            username={log["creator"]["username"]}
-            type="homeView"
-            rawDateTime={log["createdAt"]}
-            date={loggedDate}
-            time={loggedTime}
-            text={log["logMessage"]}
-          ></Text>
-        );
+        // tempLogArray.push(
+        //   <Text
+        //     username={log["creator"]["username"]}
+        //     type="homeView"
+        //     rawDateTime={log["createdAt"]}
+        //     date={loggedDate}
+        //     time={loggedTime}
+        //     text={log["logMessage"]}
+        //   ></Text>
+        // );
+
+        tempLogArray.push({
+          text: `${log["creator"]["username"]}:~ ${log["logMessage"]}`,
+          cmd: true,
+        });
       }
       setFeed(tempLogArray);
     });
@@ -67,14 +105,15 @@ function Homepage() {
           since the 1500s, when an unknown printer took a galley of type and
           scrambled it to make a type specimen book.
         </p>
-        {feed.length ? (
+        <Terminal lines={feed} interval={25} />
+        {/* {feed.length ? (
           <div>
             <p className="heading">RECENT LOGS</p>
             <div className="logs">{feed}</div>
           </div>
         ) : (
           <p className="heading">LOADING ...</p>
-        )}
+        )} */}
       </div>
     </div>
   );

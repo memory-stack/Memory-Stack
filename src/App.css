@@ -21,6 +21,10 @@ body {
   padding: 0px 8.5%;
 }
 
+.Terminal-code {
+  color: #ffffff;
+}
+
 a {
   color: #ffffff;
   text-decoration: none;
