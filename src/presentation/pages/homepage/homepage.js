@@ -74,30 +74,42 @@ function Homepage() {
           since the 1500s, when an unknown printer took a galley of type and
           scrambled it to make a type specimen book.
         </p>
-        {feed.length == 0 && (
-          <Terminal
-            lines={[
-              {
-                text: "mstak logs",
-                cmd: true,
-              },
-              {
-                text: "✔ Loaded logs",
-                cmd: false,
-                repeat: true,
-                repeatCount: 5,
-                frames: spinner.map(function (spinner) {
-                  return {
-                    text: spinner + " Loading logs",
-                    delay: 40,
-                  };
-                }),
-              },
-            ]}
-            interval={80}
-          />
-        )}
-        {feed.length != 0 && <Terminal lines={feed} interval={20} />}
+
+        <div className="terminalBox">
+          <div className="actionButtons">
+            <div className="actionButtonRed"></div>
+            <div className="actionButtonYellow"></div>
+            <div className="actionButtonGreen"></div>
+            <p className="terminalHeading">user@memory-stack:~ Recent logs</p>
+          </div>
+
+          <div className="terminalCommands">
+            {feed.length == 0 && (
+              <Terminal
+                lines={[
+                  {
+                    text: "mstak logs",
+                    cmd: true,
+                  },
+                  {
+                    text: "✔ Loaded logs",
+                    cmd: false,
+                    repeat: true,
+                    repeatCount: 5,
+                    frames: spinner.map(function (spinner) {
+                      return {
+                        text: spinner + " Loading logs",
+                        delay: 40,
+                      };
+                    }),
+                  },
+                ]}
+                interval={80}
+              />
+            )}
+            {feed.length != 0 && <Terminal lines={feed} interval={10} />}
+          </div>
+        </div>
         {/* {feed.length ? (
           <div>
             <p className="heading">RECENT LOGS</p>

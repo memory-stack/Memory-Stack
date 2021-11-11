@@ -143,3 +143,80 @@ input {
 input {
   color: white;
 }
+
+.terminalBox {
+  height: 450px;
+  overflow: auto;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  position: relative;
+  /* display: flex; */
+  /* flex-direction: column-reverse; */
+}
+
+.terminalCommands {
+  margin-left: 32px;
+}
+
+.terminalHeading {
+  position: absolute;
+  font-weight: 500;
+  color: #888;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-block;
+}
+
+.actionButtons {
+  /* position: absolute; */
+  margin-top: 16px;
+  margin-bottom: 16px;
+  margin-left: 16px;
+  margin-bottom: 28px;
+}
+
+.actionButtonRed {
+  height: 16px;
+  width: 16px;
+  background: #ee5c54;
+  border-radius: 16px;
+  display: inline-block;
+}
+
+.actionButtonYellow {
+  height: 16px;
+  width: 16px;
+  background: #f8bc45;
+  border-radius: 16px;
+  display: inline-block;
+  margin-left: 8px;
+}
+
+.actionButtonGreen {
+  height: 16px;
+  width: 16px;
+  background: #5dc942;
+  border-radius: 16px;
+  display: inline-block;
+  margin-left: 8px;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
