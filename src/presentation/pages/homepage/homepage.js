@@ -1,7 +1,13 @@
 import Text from "../../components/text/text";
 import socketIOClient from "socket.io-client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Terminal from "react-animated-term";
+
+const AlwaysScrollToBottom = () => {
+  const elementRef = useRef();
+  useEffect(() => elementRef.current.scrollIntoView());
+  return <div ref={elementRef} />;
+};
 
 function Homepage() {
   const spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
@@ -76,11 +82,13 @@ function Homepage() {
         </p>
 
         <div className="terminalBox">
+          <AlwaysScrollToBottom />
+
           <div className="actionButtons">
             <div className="actionButtonRed"></div>
             <div className="actionButtonYellow"></div>
             <div className="actionButtonGreen"></div>
-            <p className="terminalHeading">user@memory-stack:~ Recent logs</p>
+            <p className="terminalHeading">usr@mstak:~ Recent logs</p>
           </div>
 
           <div className="terminalCommands">
