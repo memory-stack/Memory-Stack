@@ -145,13 +145,13 @@ input {
 }
 
 .terminalBox {
-  height: 450px;
+  height: 400px;
   overflow: auto;
   border: 1px solid #ffffff;
   box-sizing: border-box;
   position: relative;
-  /* display: flex; */
-  /* flex-direction: column-reverse; */
+  /* display: flex;
+  flex-direction: column-reverse; */
 }
 
 .terminalCommands {
@@ -165,6 +165,7 @@ input {
   left: 50%;
   transform: translateX(-50%);
   display: inline-block;
+  font-size: 14px;
 }
 
 .actionButtons {
@@ -176,16 +177,16 @@ input {
 }
 
 .actionButtonRed {
-  height: 16px;
-  width: 16px;
+  height: 14px;
+  width: 14px;
   background: #ee5c54;
   border-radius: 16px;
   display: inline-block;
 }
 
 .actionButtonYellow {
-  height: 16px;
-  width: 16px;
+  height: 14px;
+  width: 14px;
   background: #f8bc45;
   border-radius: 16px;
   display: inline-block;
@@ -193,8 +194,8 @@ input {
 }
 
 .actionButtonGreen {
-  height: 16px;
-  width: 16px;
+  height: 14px;
+  width: 14px;
   background: #5dc942;
   border-radius: 16px;
   display: inline-block;
