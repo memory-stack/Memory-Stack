@@ -9,20 +9,111 @@ const AlwaysScrollToBottom = () => {
   return <div ref={elementRef} />;
 };
 
+var virgin = 0;
+var prev = 0;
 function Homepage() {
   const spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
   const [feed, setFeed] = useState([]);
+  const [staticFeed, setStaticFeed] = useState([]);
 
   useEffect(() => {
     const socket = socketIOClient("https://api-memory-stack.herokuapp.com");
     socket.on("recentLogs", (newLogs) => {
       console.log("connection established");
       console.log(feed.length);
-      var cnt = 0;
       setFeed([]);
       var tempLogArray = [];
-      for (var i = newLogs.length - 1; i >= 0; i--) {
+      var tempStaticArray = [];
+      if (virgin == 0)
+        for (var i = newLogs.length - 1; i >= 0; i--) {
+          // if (cnt++ > 20) break;
+          const log = newLogs[i];
+          var time = new Date(log["createdAt"]);
+          var date = time.getDate();
+          var month = time.getMonth();
+          var year = time.getFullYear();
+
+          if (date < 10) date = "0" + date.toString();
+          if (month < 10) month = "0" + month.toString();
+          if (year < 10) year = "0" + year.toString();
+          const loggedDate = `${date} - ${month} - ${year}`;
+
+          var logHour = time.getHours();
+          var logMinute = time.getMinutes();
+          var logSecond = time.getSeconds();
+
+          if (logHour < 10) logHour = "0" + logHour.toString();
+          if (logMinute < 10) logMinute = "0" + logMinute.toString();
+          if (logSecond < 10) logSecond = "0" + logSecond.toString();
+
+          logHour = logHour.toString();
+          logMinute = logMinute.toString();
+          logSecond = logSecond.toString();
+
+          const loggedTime = `${logHour}:${logMinute}`;
+
+          // tempLogArray.push(
+          //   <Text
+          //     username={log["creator"]["username"]}
+          //     type="homeView"
+          //     rawDateTime={log["createdAt"]}
+          //     date={loggedDate}
+          //     time={loggedTime}
+          //     text={log["logMessage"]}
+          //   ></Text>
+          // );
+
+          tempLogArray.push({
+            text: `${log["creator"]["username"]}:~ ${log["logMessage"]}`,
+            cmd: true,
+          });
+          tempStaticArray.push(
+            <p className="bodyText">
+              $ {log["creator"]["username"]}:~ {log["logMessage"]}
+            </p>
+          );
+        }
+      else {
+        console.log(prev);
+        for (var i = prev - 3; i >= 0; i--) {
+          // if (cnt++ > 20) break;
+          const log = newLogs[i];
+          var time = new Date(log["createdAt"]);
+          var date = time.getDate();
+          var month = time.getMonth();
+          var year = time.getFullYear();
+
+          if (date < 10) date = "0" + date.toString();
+          if (month < 10) month = "0" + month.toString();
+          if (year < 10) year = "0" + year.toString();
+          const loggedDate = `${date} - ${month} - ${year}`;
+
+          var logHour = time.getHours();
+          var logMinute = time.getMinutes();
+          var logSecond = time.getSeconds();
+
+          if (logHour < 10) logHour = "0" + logHour.toString();
+          if (logMinute < 10) logMinute = "0" + logMinute.toString();
+          if (logSecond < 10) logSecond = "0" + logSecond.toString();
+
+          logHour = logHour.toString();
+          logMinute = logMinute.toString();
+          logSecond = logSecond.toString();
+
+          const loggedTime = `${logHour}:${logMinute}`;
+
+          tempStaticArray.push(
+            <p className="bodyText">
+              $ {log["creator"]["username"]}:~ {log["logMessage"]}
+            </p>
+          );
+        }
+      }
+      console.log(`prev is value ${prev}`);
+
+      for (var i = newLogs.length - 1; i >= prev; i--) {
         // if (cnt++ > 20) break;
+
         const log = newLogs[i];
         var time = new Date(log["createdAt"]);
         var date = time.getDate();
@@ -48,25 +139,22 @@ function Homepage() {
 
         const loggedTime = `${logHour}:${logMinute}`;
 
-        // tempLogArray.push(
-        //   <Text
-        //     username={log["creator"]["username"]}
-        //     type="homeView"
-        //     rawDateTime={log["createdAt"]}
-        //     date={loggedDate}
-        //     time={loggedTime}
-        //     text={log["logMessage"]}
-        //   ></Text>
-        // );
-
         tempLogArray.push({
           text: `${log["creator"]["username"]}:~ ${log["logMessage"]}`,
           cmd: true,
         });
+        tempStaticArray.push(
+          <p className="bodyText">
+            $ {log["creator"]["username"]}:~ {log["logMessage"]}
+          </p>
+        );
       }
+      prev = tempLogArray.length + tempStaticArray.length;
+      if (virgin != 0) setStaticFeed(tempStaticArray);
+      virgin = 1;
       setFeed(tempLogArray);
     });
-  }, [setFeed]);
+  }, [setFeed, setStaticFeed]);
 
   return (
     <div>
@@ -116,6 +204,7 @@ function Homepage() {
               />
             )}
             {feed.length != 0 && <Terminal lines={feed} interval={10} />}
+            {staticFeed}
           </div>
         </div>
         {/* {feed.length ? (
