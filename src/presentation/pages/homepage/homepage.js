@@ -102,22 +102,17 @@ function Homepage() {
 
       const loggedTime = `${logHour}:${logMinute}`;
 
+      // tempLiveArray.push(
+      //   `<a>only <span style="color: #27ae60;">5kb</span> Gzipped!</a>`
+      // );
+
       tempLiveArray.push(
-        `<p style="color:#ffffff;"><span style="color: #A772FF;">$${log[
+        `<a style="color:#ffffff;"><span style="color: #A772FF;">$ ${log[
           "creator"
         ]["username"].toLowerCase()}:~</span> ${log[
           "logMessage"
-        ].toUpperCase()}</p>`
+        ].toUpperCase()}</a>`
       );
-
-      // `<p>${log["creator"]["username"].toLowerCase()}:~ ${log[
-      //   "logMessage"
-      // ].toUpperCase()}</p>`;
-
-      // tempLogArray.push({
-      //   text: `${log["creator"]["username"]}:~ ${log["logMessage"]}`,
-      //   cmd: true,
-      // });
       console.log(values);
       setValues({
         staticFeed: [<p>{values.liveFeed[0]}</p>, ...staticFeed],
