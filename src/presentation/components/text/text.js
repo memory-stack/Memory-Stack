@@ -8,9 +8,19 @@ function Text(props) {
   const date = props.date;
   const time = props.time;
   const text = props.text;
-  var toReturn;
+  var toReturn = <p></p>;
 
   if (type == "homeView")
+    // toReturn = (
+    //   <p
+    //     onClick={() => {
+    //       navigator.push(`/${username}/${rawDateTime}/logs`);
+    //     }}
+    //     className="bodyText link"
+    //   >
+    //     <span>{time} :</span> {text.toUpperCase()}
+    //   </p>
+    // );
     toReturn = (
       <p
         onClick={() => {
@@ -18,7 +28,7 @@ function Text(props) {
         }}
         className="bodyText link"
       >
-        <span>{time} :</span> {text.toUpperCase()}
+        <span>$ {username}:~</span> {text.toUpperCase()}
       </p>
     );
   else if (type == "profileView")

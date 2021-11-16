@@ -12,7 +12,10 @@ function Homepage() {
   const spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
 
   const [values, setValues] = useState({
-    liveFeed: [],
+    liveFeed: {
+      typewriter: "",
+      textWidget: <Text></Text>,
+    },
     staticFeed: [],
   });
 
@@ -102,20 +105,25 @@ function Homepage() {
 
       const loggedTime = `${logHour}:${logMinute}`;
 
-      // tempLiveArray.push(
-      //   `<a>only <span style="color: #27ae60;">5kb</span> Gzipped!</a>`
-      // );
+      tempLiveArray.typewriter = `<a style="color:#ffffff;"><span style="color: #A772FF;">$ ${log[
+        "creator"
+      ]["username"].toLowerCase()}:~</span> ${log[
+        "logMessage"
+      ].toUpperCase()}</a>`;
 
-      tempLiveArray.push(
-        `<a style="color:#ffffff;"><span style="color: #A772FF;">$ ${log[
-          "creator"
-        ]["username"].toLowerCase()}:~</span> ${log[
-          "logMessage"
-        ].toUpperCase()}</a>`
+      tempLiveArray.textWidget = (
+        <Text
+          username={log["creator"]["username"]}
+          type="homeView"
+          rawDateTime={log["createdAt"]}
+          date={loggedDate}
+          time={loggedTime}
+          text={log["logMessage"]}
+        ></Text>
       );
       console.log(values);
       setValues({
-        staticFeed: [<p>{values.liveFeed[0]}</p>, ...staticFeed],
+        staticFeed: [liveFeed.textWidget, ...staticFeed],
         liveFeed: tempLiveArray,
       });
     });
@@ -160,7 +168,7 @@ function Homepage() {
                     text: "✔ Loaded logs",
                     cmd: false,
                     repeat: true,
-                    repeatCount: 5,
+                    repeatCount: 5000,
                     frames: spinner.map(function (spinner) {
                       return {
                         text: spinner + " Loading logs",
@@ -173,10 +181,10 @@ function Homepage() {
               />
             )}
 
-            {liveFeed.length != 0 && (
+            {liveFeed.typewriter.length != 0 && (
               <Typewriter
                 options={{
-                  strings: liveFeed,
+                  strings: liveFeed.typewriter,
                   autoStart: true,
                   loop: false,
                   pauseFor: 100000000000000,
