@@ -272,7 +272,7 @@ input {
 } */
 
 .shadow:after {
-  filter: blur(20px);
+  filter: blur(5px);
 }
 
 @keyframes animate {
