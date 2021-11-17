@@ -39,7 +39,7 @@ function Logs() {
       username: username,
       date: date,
     });
-    // console.log(res);
+    console.log(res);
     title = res.message.thought[0].thought;
     var logs = res.message.logs;
     for (let log of logs) {

@@ -148,51 +148,53 @@ function Homepage() {
           scrambled it to make a type specimen book.
         </p>
 
-        <div className="terminalBox">
-          <div className="actionButtons">
-            <div className="actionButtonRed"></div>
-            <div className="actionButtonYellow"></div>
-            <div className="actionButtonGreen"></div>
-            <p className="terminalHeading">usr@mstak:~ Recent logs</p>
-          </div>
+        <div className="shadow">
+          <div className="terminalBox">
+            <div className="actionButtons">
+              <div className="actionButtonRed"></div>
+              <div className="actionButtonYellow"></div>
+              <div className="actionButtonGreen"></div>
+              <p className="terminalHeading">usr@mstak:~ Recent logs</p>
+            </div>
 
-          <div className="terminalCommands">
-            {staticFeed.length == 0 && (
-              <Terminal
-                lines={[
-                  {
-                    text: "mstak logs",
-                    cmd: true,
-                  },
-                  {
-                    text: "✔ Loaded logs",
-                    cmd: false,
-                    repeat: true,
-                    repeatCount: 5000,
-                    frames: spinner.map(function (spinner) {
-                      return {
-                        text: spinner + " Loading logs",
-                        delay: 40,
-                      };
-                    }),
-                  },
-                ]}
-                interval={80}
-              />
-            )}
+            <div className="terminalCommands">
+              {staticFeed.length == 0 && (
+                <Terminal
+                  lines={[
+                    {
+                      text: "mstak logs",
+                      cmd: true,
+                    },
+                    {
+                      text: "✔ Loaded logs",
+                      cmd: false,
+                      repeat: true,
+                      repeatCount: 5000,
+                      frames: spinner.map(function (spinner) {
+                        return {
+                          text: spinner + " Loading logs",
+                          delay: 40,
+                        };
+                      }),
+                    },
+                  ]}
+                  interval={80}
+                />
+              )}
 
-            {liveFeed.typewriter.length != 0 && (
-              <Typewriter
-                options={{
-                  strings: liveFeed.typewriter,
-                  autoStart: true,
-                  loop: false,
-                  pauseFor: 100000000000000,
-                }}
-              />
-            )}
+              {liveFeed.typewriter.length != 0 && (
+                <Typewriter
+                  options={{
+                    strings: liveFeed.typewriter,
+                    autoStart: true,
+                    loop: false,
+                    pauseFor: 100000000000000,
+                  }}
+                />
+              )}
 
-            {staticFeed}
+              {staticFeed}
+            </div>
           </div>
         </div>
       </div>

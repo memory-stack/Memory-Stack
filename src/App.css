@@ -9,16 +9,31 @@
   --fs-xl: clamp(3.5rem, 3vw, 12rem);
   --fs-heading: 1.25rem;
   --fs-body: 1rem;
+
+  --gradient-shadow: linear-gradient(
+    45deg,
+    #fb0094,
+    #0000ff,
+    #00ff00,
+    #ffff00,
+    #ff0000,
+    #fb0094,
+    #0000ff,
+    #00ff00,
+    #ffff00,
+    #ff0000
+  );
 }
 
 * {
   margin: 0px;
-  background-color: var(--clr-bg);
+  /* background-color: var(--clr-bg); */
   font-family: "Poppins";
 }
 
 body {
   padding: 0px 8.5%;
+  background-color: var(--clr-bg);
 }
 
 .Terminal-code {
@@ -147,7 +162,7 @@ input {
 .terminalBox {
   height: 400px;
   overflow: auto;
-  /* border: 1px solid #ffffff; */
+  /* border: 1px solid transparent; */
   box-sizing: border-box;
   position: relative;
   box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.25);
@@ -221,4 +236,53 @@ input {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.shadow {
+  height: 400px;
+  position: relative;
+  background: var(--clr-bg);
+}
+.shadow:before,
+.shadow:after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: var(--gradient-shadow);
+  background-size: 400%;
+  width: calc(100%);
+  height: calc(100%);
+  z-index: -1;
+  animation: animate 20s linear infinite;
+}
+
+/* WITH BORDER */
+/* .shadow:after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background: var(--gradient-shadow);
+  background-size: 400%;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  z-index: -1;
+  animation: animate 20s linear infinite;
+} */
+
+.shadow:after {
+  filter: blur(20px);
+}
+
+@keyframes animate {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 300% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
