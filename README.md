@@ -25,11 +25,11 @@ AngularJS-powered HTML5 Markdown editor.
 
 Loren Ipsum need to insert something here
 
-| Endpoint                    | Details                                         | Example                                                     |
-| --------------------------- | ----------------------------------------------- | ----------------------------------------------------------- |
-| /<username>                 | Displays the logged dates of the specified user | https://www.memorystack.tech/void                           |
-| /<username>/<datetime>/logs | Displays the logs of a specified date and user  | https://memorystack.tech/void/2021-11-18T07:44:39.970Z/logs |
-| /signup                     | Your log in double quotes                       | https://memory-stack.herokuapp.com/signup                   |
+| Endpoint                | Details                                         | Example                                                     |
+| ----------------------- | ----------------------------------------------- | ----------------------------------------------------------- |
+| /username               | Displays the logged dates of the specified user | https://www.memorystack.tech/void                           |
+| /username/datetime/logs | Displays the logs of a specified date and user  | https://memorystack.tech/void/2021-11-18T07:44:39.970Z/logs |
+| /signup                 | Your log in double quotes                       | https://memory-stack.herokuapp.com/signup                   |
 
 Markdown is a lightweight markup language based on the formatting conventions
 that people naturally use in email.
