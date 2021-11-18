@@ -64,7 +64,7 @@ function Logs() {
       logMinute = logMinute.toString();
       logSecond = logSecond.toString();
 
-      const loggedTime = `${logHour}${logMinute}`;
+      const loggedTime = `${logHour}:${logMinute}`;
 
       feed.push(
         <Text type="logView" date="" time={loggedTime} text={message}></Text>
