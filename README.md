@@ -93,32 +93,18 @@ Memory Stack uses a number of open source projects to work properly:
 - [node.js] - evented I/O for the backend & CLI application.
 - [Express] - fast node.js network app framework [@tjholowaychuk]
 
-## Development
+## Contributors
 
 Want to contribute? Great!
 
+<a href="https://github.com/memory-stack/frontend/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=memory-stack/frontend" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
+
 Dillinger uses Gulp + Webpack for fast developing.
 Make a change in your file and instantaneously see your updates!
-
-Open your favorite Terminal and run these commands.
-
-First Tab:
-
-```sh
-node app
-```
-
-Second Tab:
-
-```sh
-gulp watch
-```
-
-(optional) Third:
-
-```sh
-karma test
-```
 
 ## License
 
