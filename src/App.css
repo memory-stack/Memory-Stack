@@ -262,18 +262,18 @@ input {
 /* .shadow:after {
   content: "";
   position: absolute;
-  top: -2px;
-  left: -2px;
+  top: -1px;
+  left: -1px;
   background: var(--gradient-shadow);
   background-size: 400%;
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
   z-index: -1;
   animation: animate 20s linear infinite;
 } */
 
 .shadow:after {
-  filter: blur(5px);
+  filter: blur(2px);
 }
 
 @keyframes animate {
