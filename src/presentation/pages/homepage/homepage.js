@@ -27,11 +27,9 @@ function Homepage() {
   var staticFeed = values['staticFeed'];
 
   useEffect(() => {
-    console.log('in the use motherfucking effect');
     socket.connect();
 
     socket.on('recentLogs', (newLogs) => {
-      console.log('connection established');
       var tempStaticArray = [];
       for (var i = newLogs.length - 1; i >= 0; i--) {
         const log = newLogs[i];
