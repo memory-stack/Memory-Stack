@@ -27,9 +27,11 @@ function Homepage() {
   var staticFeed = values['staticFeed'];
 
   useEffect(() => {
-    // socket.connect();
+    console.log('in the use motherfucking effect');
+    socket.connect();
 
     socket.on('recentLogs', (newLogs) => {
+      console.log('connection established');
       var tempStaticArray = [];
       for (var i = newLogs.length - 1; i >= 0; i--) {
         const log = newLogs[i];
@@ -65,6 +67,7 @@ function Homepage() {
             date={loggedDate}
             time={loggedTime}
             text={log['logMessage']}
+            socket={socket}
           ></Text>
         );
 
@@ -123,6 +126,7 @@ function Homepage() {
           date={loggedDate}
           time={loggedTime}
           text={log['logMessage']}
+          socket={socket}
         ></Text>
       );
 
@@ -140,7 +144,7 @@ function Homepage() {
       socket.off();
       // socket.disconnect();
     };
-  }, [values]);
+  }, [liveFeed, staticFeed, values]);
 
   return (
     <div>
@@ -191,6 +195,7 @@ function Homepage() {
 
               <div
                 onClick={() => {
+                  socket.disconnect();
                   navigator.push(
                     `/${liveFeed.username}/${liveFeed.rawDateTime}/logs`
                   );

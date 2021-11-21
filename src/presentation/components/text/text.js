@@ -1,4 +1,4 @@
-import { useHistory } from "react-router";
+import { useHistory } from 'react-router';
 
 function Text(props) {
   const navigator = useHistory();
@@ -8,9 +8,10 @@ function Text(props) {
   const date = props.date;
   const time = props.time;
   const text = props.text;
+  const socket = props.socket;
   var toReturn = <p></p>;
 
-  if (type == "homeView")
+  if (type == 'homeView')
     // toReturn = (
     //   <p
     //     onClick={() => {
@@ -24,6 +25,7 @@ function Text(props) {
     toReturn = (
       <p
         onClick={() => {
+          if (socket != null) socket.disconnect();
           navigator.push(`/${username}/${rawDateTime}/logs`);
         }}
         className="bodyText link"
@@ -31,7 +33,7 @@ function Text(props) {
         <span>$ {username}:~</span> {text.toUpperCase()}
       </p>
     );
-  else if (type == "profileView")
+  else if (type == 'profileView')
     toReturn = (
       <p
         onClick={() => {
@@ -42,7 +44,7 @@ function Text(props) {
         {date} : {text.toUpperCase()}
       </p>
     );
-  else if (type == "logView")
+  else if (type == 'logView')
     toReturn = (
       <p className="bodyTextFaded">
         {time} : {text}
