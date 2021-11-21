@@ -1,51 +1,55 @@
-import Text from "../../components/text/text";
-import socketIOClient from "socket.io-client";
-import { useState, useEffect, useRef } from "react";
-import Terminal from "react-animated-term";
-import { feedActions } from "../../../domain/stores/store";
-import { useSelector, useDispatch } from "react-redux";
-import Typewriter from "typewriter-effect";
+import Text from '../../components/text/text';
+import socketIOClient from 'socket.io-client';
+import { useState, useEffect, useRef } from 'react';
+import Terminal from 'react-animated-term';
+import { feedActions } from '../../../domain/stores/store';
+import { useSelector, useDispatch } from 'react-redux';
+import Typewriter from 'typewriter-effect';
+import { useHistory } from 'react-router';
 
-const socket = socketIOClient("https://api-memory-stack.herokuapp.com");
+const socket = socketIOClient('https://api-memory-stack.herokuapp.com');
 
 function Homepage() {
-  const spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
+  const spinner = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
+  const navigator = useHistory();
 
   const [values, setValues] = useState({
     liveFeed: {
-      typewriter: "",
+      typewriter: '',
       textWidget: <Text></Text>,
+      username: '',
+      rawDateTime: '',
     },
     staticFeed: [],
   });
 
-  var liveFeed = values["liveFeed"];
-  var staticFeed = values["staticFeed"];
+  var liveFeed = values['liveFeed'];
+  var staticFeed = values['staticFeed'];
 
   useEffect(() => {
-    // socket.connect();
+    socket.connect();
 
-    socket.on("recentLogs", (newLogs) => {
+    socket.on('recentLogs', (newLogs) => {
       var tempStaticArray = [];
       for (var i = newLogs.length - 1; i >= 0; i--) {
         const log = newLogs[i];
-        var time = new Date(log["createdAt"]);
+        var time = new Date(log['createdAt']);
         var date = time.getDate();
         var month = time.getMonth();
         var year = time.getFullYear();
 
-        if (date < 10) date = "0" + date.toString();
-        if (month < 10) month = "0" + month.toString();
-        if (year < 10) year = "0" + year.toString();
+        if (date < 10) date = '0' + date.toString();
+        if (month < 10) month = '0' + month.toString();
+        if (year < 10) year = '0' + year.toString();
         const loggedDate = `${date} - ${month} - ${year}`;
 
         var logHour = time.getHours();
         var logMinute = time.getMinutes();
         var logSecond = time.getSeconds();
 
-        if (logHour < 10) logHour = "0" + logHour.toString();
-        if (logMinute < 10) logMinute = "0" + logMinute.toString();
-        if (logSecond < 10) logSecond = "0" + logSecond.toString();
+        if (logHour < 10) logHour = '0' + logHour.toString();
+        if (logMinute < 10) logMinute = '0' + logMinute.toString();
+        if (logSecond < 10) logSecond = '0' + logSecond.toString();
 
         logHour = logHour.toString();
         logMinute = logMinute.toString();
@@ -55,12 +59,13 @@ function Homepage() {
 
         tempStaticArray.push(
           <Text
-            username={log["creator"]["username"]}
+            username={log['creator']['username']}
             type="homeView"
-            rawDateTime={log["createdAt"]}
+            rawDateTime={log['createdAt']}
             date={loggedDate}
             time={loggedTime}
-            text={log["logMessage"]}
+            text={log['logMessage']}
+            socket={socket}
           ></Text>
         );
 
@@ -75,29 +80,29 @@ function Homepage() {
       });
     });
 
-    socket.on("newLog", (newLog) => {
+    socket.on('newLog', (newLog) => {
       var tempLiveArray = [];
 
       // console.log(`this is coming from newLog ${tempStaticArray}`);
 
       const log = newLog;
-      var time = new Date(log["createdAt"]);
+      var time = new Date(log['createdAt']);
       var date = time.getDate();
       var month = time.getMonth();
       var year = time.getFullYear();
 
-      if (date < 10) date = "0" + date.toString();
-      if (month < 10) month = "0" + month.toString();
-      if (year < 10) year = "0" + year.toString();
+      if (date < 10) date = '0' + date.toString();
+      if (month < 10) month = '0' + month.toString();
+      if (year < 10) year = '0' + year.toString();
       const loggedDate = `${date} - ${month} - ${year}`;
 
       var logHour = time.getHours();
       var logMinute = time.getMinutes();
       var logSecond = time.getSeconds();
 
-      if (logHour < 10) logHour = "0" + logHour.toString();
-      if (logMinute < 10) logMinute = "0" + logMinute.toString();
-      if (logSecond < 10) logSecond = "0" + logSecond.toString();
+      if (logHour < 10) logHour = '0' + logHour.toString();
+      if (logMinute < 10) logMinute = '0' + logMinute.toString();
+      if (logSecond < 10) logSecond = '0' + logSecond.toString();
 
       logHour = logHour.toString();
       logMinute = logMinute.toString();
@@ -106,21 +111,25 @@ function Homepage() {
       const loggedTime = `${logHour}:${logMinute}`;
 
       tempLiveArray.typewriter = `<a style="color:#ffffff;"><span style="color: #A772FF;">$ ${log[
-        "creator"
-      ]["username"].toLowerCase()}:~</span> ${log[
-        "logMessage"
+        'creator'
+      ]['username'].toLowerCase()}:~</span> ${log[
+        'logMessage'
       ].toUpperCase()}</a>`;
 
       tempLiveArray.textWidget = (
         <Text
-          username={log["creator"]["username"]}
+          username={log['creator']['username']}
           type="homeView"
-          rawDateTime={log["createdAt"]}
+          rawDateTime={log['createdAt']}
           date={loggedDate}
           time={loggedTime}
-          text={log["logMessage"]}
+          text={log['logMessage']}
+          socket={socket}
         ></Text>
       );
+
+      tempLiveArray.username = log['creator']['username'];
+      tempLiveArray.rawDateTime = log['createdAt'];
       console.log(values);
       setValues({
         staticFeed: [liveFeed.textWidget, ...staticFeed],
@@ -129,11 +138,11 @@ function Homepage() {
     });
 
     return () => {
-      console.log("websocket unmounting!!!!!");
+      console.log('websocket unmounting!!!!!');
       socket.off();
       // socket.disconnect();
     };
-  }, [values]);
+  }, [liveFeed, staticFeed, values]);
 
   return (
     <div>
@@ -162,17 +171,17 @@ function Homepage() {
                 <Terminal
                   lines={[
                     {
-                      text: "mstak logs",
+                      text: 'mstak logs',
                       cmd: true,
                     },
                     {
-                      text: "✔ Loaded logs",
+                      text: '✔ Loaded logs',
                       cmd: false,
                       repeat: true,
                       repeatCount: 5000,
                       frames: spinner.map(function (spinner) {
                         return {
-                          text: spinner + " Loading logs",
+                          text: spinner + ' Loading logs',
                           delay: 40,
                         };
                       }),
@@ -182,16 +191,25 @@ function Homepage() {
                 />
               )}
 
-              {liveFeed.typewriter.length != 0 && (
-                <Typewriter
-                  options={{
-                    strings: liveFeed.typewriter,
-                    autoStart: true,
-                    loop: false,
-                    pauseFor: 100000000000000,
-                  }}
-                />
-              )}
+              <div
+                onClick={() => {
+                  socket.disconnect();
+                  navigator.push(
+                    `/${liveFeed.username}/${liveFeed.rawDateTime}/logs`
+                  );
+                }}
+              >
+                {liveFeed.typewriter.length != 0 && (
+                  <Typewriter
+                    options={{
+                      strings: liveFeed.typewriter,
+                      autoStart: true,
+                      loop: false,
+                      pauseFor: 100000000000000,
+                    }}
+                  />
+                )}
+              </div>
 
               {staticFeed}
             </div>
