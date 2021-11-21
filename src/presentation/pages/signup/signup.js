@@ -12,6 +12,7 @@ function Signup() {
   const [isUsernameValid, setUsernameValid] = useState(false);
   const [isUsernameBlank, setUsernameBlank] = useState(true);
   const [isUsernameLoading, setUsernameLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   let handleUsernameChange = async () => {
     setUsernameLoading(true);
@@ -19,13 +20,13 @@ function Signup() {
     setUsernameBlank(username.length == '');
     var verdict = await postRequest('userExists', { username: username });
 
-    console.log(verdict.message);
     if (verdict.message == 'False') setUsernameValid(true);
     else setUsernameValid(false);
     setUsernameLoading(false);
   };
 
-  async function handleSignup() {
+  async function handleSignup(e) {
+    e.preventDefault();
     var username = document.getElementById('usernameField').value;
     var password = document.getElementById('passwordField').value;
     var email = document.getElementById('emailField').value;
@@ -33,14 +34,16 @@ function Signup() {
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(password, salt, async (err, hashedPassword) => {
         console.log(hashedPassword);
-        await postRequest(SIGNUP, {
+        var res = await postRequest(SIGNUP, {
           username: username,
           password: hashedPassword,
           email: email,
           about: bio,
         });
 
-        navigator.push(SIGNUP_SUCCESS_PAGE_ROUTE);
+        let verdict = res.success;
+        if (verdict == false) setErrorMessage(res.error);
+        else navigator.push(SIGNUP_SUCCESS_PAGE_ROUTE);
       });
     });
   }
@@ -52,7 +55,7 @@ function Signup() {
         signup to use the created account <span>with the CLI.</span>
       </p>
 
-      <form action="/" className="form">
+      <form action="/" onSubmit={handleSignup} className="form">
         <input
           type="text"
           placeholder="username"
@@ -77,7 +80,7 @@ function Signup() {
           type="password"
           placeholder="password"
           id="passwordField"
-          minlength="8"
+          minLength="8"
           required
         />
         <button
@@ -90,7 +93,6 @@ function Signup() {
               ? 'button'
               : 'disabledButton'
           }
-          onSubmit={handleSignup}
           disabled={
             isUsernameBlank
               ? false
@@ -110,6 +112,7 @@ function Signup() {
             : 'Username taken'}
         </button>
       </form>
+      <p className="warning">{errorMessage}</p>
     </div>
   );
 }

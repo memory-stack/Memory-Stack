@@ -67,6 +67,13 @@ a {
   color: var(--clr-primary);
   font-weight: 400;
 }
+.warning {
+  font-size: var(--fs-body);
+  color: red;
+  font-weight: 400;
+  margin-top: 20px;
+  text-align: center;
+}
 
 .bodyTextFaded {
   font-size: var(--fs-body);
