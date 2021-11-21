@@ -7,11 +7,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import Typewriter from 'typewriter-effect';
 import { useHistory } from 'react-router';
 
-const socket = socketIOClient('https://api-memory-stack.herokuapp.com');
+//const socket = socketIOClient('https://api-memory-stack.herokuapp.com');
 
-function Homepage() {
+function Homepage(props) {
   const spinner = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
   const navigator = useHistory();
+  const socket = props.socket;
 
   const [values, setValues] = useState({
     liveFeed: {
