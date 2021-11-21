@@ -39,7 +39,7 @@ function Logs() {
       username: username,
       date: date,
     });
-    // console.log(res);
+    console.log(res);
     title = res.message.thought[0].thought;
     var logs = res.message.logs;
     for (let log of logs) {
@@ -64,7 +64,7 @@ function Logs() {
       logMinute = logMinute.toString();
       logSecond = logSecond.toString();
 
-      const loggedTime = `${logHour}${logMinute}`;
+      const loggedTime = `${logHour}:${logMinute}`;
 
       feed.push(
         <Text type="logView" date="" time={loggedTime} text={message}></Text>
