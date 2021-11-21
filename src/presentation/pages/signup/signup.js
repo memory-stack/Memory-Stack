@@ -24,8 +24,12 @@ function Signup() {
     else setUsernameValid(false);
     setUsernameLoading(false);
   };
+  function onChangeHandler() {
+    setErrorMessage('');
+  }
 
   async function handleSignup(e) {
+    setErrorMessage('');
     e.preventDefault();
     var username = document.getElementById('usernameField').value;
     var password = document.getElementById('passwordField').value;
@@ -68,12 +72,14 @@ function Signup() {
           placeholder="email"
           id="emailField"
           pattern={pattern}
+          onChange={onChangeHandler}
           required
         />
         <input
           type="text"
           placeholder="about yourself in few lines"
           id="bioField"
+          onChange={onChangeHandler}
           required
         />
         <input
@@ -81,6 +87,7 @@ function Signup() {
           placeholder="password"
           id="passwordField"
           minLength="8"
+          onChange={onChangeHandler}
           required
         />
         <button
