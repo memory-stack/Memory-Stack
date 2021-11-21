@@ -5,8 +5,8 @@ function Navbar(props) {
   const socket = props.socket;
   const navigator = useHistory();
   function handleSignup() {
-    navigator.push(SIGNUP_PAGE_ROUTE);
     socket.disconnect();
+    navigator.push(SIGNUP_PAGE_ROUTE);
   }
 
   return (

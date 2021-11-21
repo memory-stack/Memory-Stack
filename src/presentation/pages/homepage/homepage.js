@@ -152,10 +152,9 @@ function Homepage(props) {
           An <span>immutable</span> logbook for your past &amp; present.
         </p>
         <p className="subHeadline">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
+          Memory Stack is your time machine to travel through the historical
+          epiphanies, your portal to unfold phenomenal future possibilities as
+          you constantly log your present moves with Memory Stack.
         </p>
 
         <div className="shadow">
