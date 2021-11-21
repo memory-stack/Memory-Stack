@@ -1,5 +1,5 @@
-import { useHistory } from "react-router";
-import { HOME_PAGE_ROUTE, SIGNUP_PAGE_ROUTE } from "../../routes/route-paths";
+import { useHistory } from 'react-router';
+import { HOME_PAGE_ROUTE, SIGNUP_PAGE_ROUTE } from '../../routes/route-paths';
 
 function Navbar() {
   const navigator = useHistory();
@@ -21,7 +21,12 @@ function Navbar() {
         <a href="" className="navbarButton" onClick={handleSignup}>
           signup
         </a>
-        <a href="" className="navbarButton">
+        <a
+          href="https://github.com/memory-stack/memory-stack"
+          className="navbarButton"
+          target="_blank"
+          rel="noreferrer"
+        >
           github
         </a>
       </div>
