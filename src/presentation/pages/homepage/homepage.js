@@ -34,46 +34,24 @@ function Homepage(props) {
       var tempStaticArray = [];
       for (var i = newLogs.length - 1; i >= 0; i--) {
         const log = newLogs[i];
-        var time = new Date(log['createdAt']);
-        var date = time.getDate();
-        var month = time.getMonth();
-        var year = time.getFullYear();
-
-        if (date < 10) date = '0' + date.toString();
-        if (month < 10) month = '0' + month.toString();
-        if (year < 10) year = '0' + year.toString();
-        const loggedDate = `${date} - ${month} - ${year}`;
-
-        var logHour = time.getHours();
-        var logMinute = time.getMinutes();
-        var logSecond = time.getSeconds();
-
-        if (logHour < 10) logHour = '0' + logHour.toString();
-        if (logMinute < 10) logMinute = '0' + logMinute.toString();
-        if (logSecond < 10) logSecond = '0' + logSecond.toString();
-
-        logHour = logHour.toString();
-        logMinute = logMinute.toString();
-        logSecond = logSecond.toString();
-
-        const loggedTime = `${logHour}:${logMinute}`;
+        const loggedTime = newLogs[i]['localCreationTime'];
+        const dateArray = newLogs[i]['localCreationDate']
+          .slice(0, 10)
+          .split('-');
+        const loggedDate =
+          dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0];
 
         tempStaticArray.push(
           <Text
             username={log['creator']['username']}
             type="homeView"
-            rawDateTime={log['createdAt']}
+            rawDateTime={loggedDate}
             date={loggedDate}
             time={loggedTime}
             text={log['logMessage']}
             socket={socket}
           ></Text>
         );
-
-        // tempLogArray.push({
-        //   text: `${log["creator"]["username"]}:~ ${log["logMessage"]}`,
-        //   cmd: true,
-        // });
       }
       setValues({
         ...values,
@@ -84,32 +62,10 @@ function Homepage(props) {
     socket.on('newLog', (newLog) => {
       var tempLiveArray = [];
 
-      // console.log(`this is coming from newLog ${tempStaticArray}`);
-
       const log = newLog;
-      var time = new Date(log['createdAt']);
-      var date = time.getDate();
-      var month = time.getMonth();
-      var year = time.getFullYear();
-
-      if (date < 10) date = '0' + date.toString();
-      if (month < 10) month = '0' + month.toString();
-      if (year < 10) year = '0' + year.toString();
-      const loggedDate = `${date} - ${month} - ${year}`;
-
-      var logHour = time.getHours();
-      var logMinute = time.getMinutes();
-      var logSecond = time.getSeconds();
-
-      if (logHour < 10) logHour = '0' + logHour.toString();
-      if (logMinute < 10) logMinute = '0' + logMinute.toString();
-      if (logSecond < 10) logSecond = '0' + logSecond.toString();
-
-      logHour = logHour.toString();
-      logMinute = logMinute.toString();
-      logSecond = logSecond.toString();
-
-      const loggedTime = `${logHour}:${logMinute}`;
+      const loggedTime = newLog['localCreationTime'];
+      const dateArray = newLog['localCreationDate'].slice(0, 10).split('-');
+      const loggedDate = dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0];
 
       tempLiveArray.typewriter = `<a style="color:#ffffff;"><span style="color: #A772FF;">$ ${log[
         'creator'
@@ -121,7 +77,7 @@ function Homepage(props) {
         <Text
           username={log['creator']['username']}
           type="homeView"
-          rawDateTime={log['createdAt']}
+          rawDateTime={loggedDate}
           date={loggedDate}
           time={loggedTime}
           text={log['logMessage']}
@@ -130,7 +86,7 @@ function Homepage(props) {
       );
 
       tempLiveArray.username = log['creator']['username'];
-      tempLiveArray.rawDateTime = log['createdAt'];
+      tempLiveArray.rawDateTime = loggedDate;
       console.log(values);
       setValues({
         staticFeed: [liveFeed.textWidget, ...staticFeed],

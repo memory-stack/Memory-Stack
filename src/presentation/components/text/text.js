@@ -39,9 +39,10 @@ function Text(props) {
         onClick={() => {
           navigator.push(`/${username}/${rawDateTime}/logs`);
         }}
-        className="bodyText link"
+        className="subHeadline link"
       >
-        {date} : {text.toUpperCase()}
+        {date}
+        {/* : {text.toUpperCase()}*/}
       </p>
     );
   else if (type == 'logView')

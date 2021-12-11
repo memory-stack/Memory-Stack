@@ -83,7 +83,7 @@ a {
 .heading {
   font-size: var(--fs-heading);
   color: var(--clr-primary);
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.1rem;
   /* font-weight: 500; */
 }
 
@@ -94,7 +94,7 @@ a {
 }
 
 .subHeadline {
-  margin-bottom: 5rem;
+  margin-bottom: 3.2rem;
   font-size: var(--fs-body);
   color: var(--clr-fade);
 }
