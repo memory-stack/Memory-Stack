@@ -39,7 +39,7 @@ function Text(props) {
         onClick={() => {
           navigator.push(`/${username}/${rawDateTime}/logs`);
         }}
-        className="subHeadline link"
+        className="subHeadline link reduceBottomMargin"
       >
         {date}
         {/* : {text.toUpperCase()}*/}

@@ -99,6 +99,10 @@ a {
   color: var(--clr-fade);
 }
 
+.reduceBottomMargin {
+  margin-bottom: 0px;
+}
+
 /* MAIN CSS */
 
 .navbar {
