@@ -1,6 +1,15 @@
-export const CLIENT_ID=process.env.REACT_APP_CLIENT_ID;
-export const RAZORPAY_KEY_ID_TEST=process.env.REACT_APP_RAZORPAY_KEY_ID_TEST;
-export const RAZORPAY_KEY_SECRET_TEST=process.env.REACT_APP_RAZORPAY_KEY_SECRET_TEST;
-export const RAZORPAY_KEY_ID=process.env.REACT_APP_RAZORPAY_KEY_ID;
-export const RAZORPAY_KEY_SECRET=process.env.REACT_APP_RAZORPAY_KEY_SECRET;
-
+export const months = [
+  "JANUARY",
+  "FEBRUARY",
+  "MARCH",
+  "APRIL",
+  "MAY",
+  "JUNE",
+  "JULY",
+  "AUGUST",
+  "SEPTEMBER",
+  "OCTOBER",
+  "NOVEMBER",
+  "DECEMBER",
+];
+export const spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];

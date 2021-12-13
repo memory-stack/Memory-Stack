@@ -1,6 +1,3 @@
-import { postRequest } from "../../../data/data-source/remote/apiCall";
-import { SIGNUP } from "../../../data/data-source/remote/apiList";
-
 function Success() {
   return (
     <div className="body">

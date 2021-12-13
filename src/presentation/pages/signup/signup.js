@@ -1,9 +1,12 @@
-import { useHistory } from 'react-router';
-import { postRequest } from '../../../data/data-source/remote/apiCall';
-import { SIGNUP } from '../../../data/data-source/remote/apiList';
-import { SIGNUP_SUCCESS_PAGE_ROUTE } from '../../routes/route-paths';
-import { useState } from 'react';
-const bcrypt = require('bcryptjs');
+import { useHistory } from "react-router";
+import { postRequest } from "../../../data/data-source/remote/apiCall";
+import {
+  SIGNUP,
+  SIGNUP_IF_USER_EXISTS,
+} from "../../../data/data-source/remote/apiList";
+import { SIGNUP_SUCCESS_PAGE_ROUTE } from "../../routes/route-paths";
+import { useState } from "react";
+const bcrypt = require("bcryptjs");
 
 function Signup() {
   const pattern =
@@ -12,29 +15,31 @@ function Signup() {
   const [isUsernameValid, setUsernameValid] = useState(false);
   const [isUsernameBlank, setUsernameBlank] = useState(true);
   const [isUsernameLoading, setUsernameLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   let handleUsernameChange = async () => {
     setUsernameLoading(true);
-    var username = document.getElementById('usernameField').value;
-    setUsernameBlank(username.length == '');
-    var verdict = await postRequest('userExists', { username: username });
+    var username = document.getElementById("usernameField").value;
+    setUsernameBlank(username.length == "");
+    var verdict = await postRequest(SIGNUP_IF_USER_EXISTS, {
+      username: username.toLowerCase(),
+    });
 
-    if (verdict.message == 'False') setUsernameValid(true);
+    if (verdict.message == "False") setUsernameValid(true);
     else setUsernameValid(false);
     setUsernameLoading(false);
   };
   function onChangeHandler() {
-    setErrorMessage('');
+    setErrorMessage("");
   }
 
   async function handleSignup(e) {
-    setErrorMessage('');
+    setErrorMessage("");
     e.preventDefault();
-    var username = document.getElementById('usernameField').value;
-    var password = document.getElementById('passwordField').value;
-    var email = document.getElementById('emailField').value;
-    var bio = document.getElementById('bioField').value;
+    var username = document.getElementById("usernameField").value;
+    var password = document.getElementById("passwordField").value;
+    var email = document.getElementById("emailField").value;
+    var bio = document.getElementById("bioField").value;
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(password, salt, async (err, hashedPassword) => {
         console.log(hashedPassword);
@@ -93,12 +98,12 @@ function Signup() {
         <button
           className={
             isUsernameBlank
-              ? 'button'
+              ? "button"
               : isUsernameLoading
-              ? 'disabledButton'
+              ? "disabledButton"
               : isUsernameValid
-              ? 'button'
-              : 'disabledButton'
+              ? "button"
+              : "disabledButton"
           }
           disabled={
             isUsernameBlank
@@ -111,12 +116,12 @@ function Signup() {
           }
         >
           {isUsernameBlank
-            ? 'Create account'
+            ? "Create account"
             : isUsernameLoading
-            ? 'Checking username'
+            ? "Checking username"
             : isUsernameValid
-            ? 'Create account'
-            : 'Username taken'}
+            ? "Create account"
+            : "Username taken"}
         </button>
       </form>
       <p className="warning">{errorMessage}</p>
