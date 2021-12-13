@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
 
 :root {
   --clr-primary: white;
@@ -28,7 +28,7 @@
 * {
   margin: 0px;
   /* background-color: var(--clr-bg); */
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
 
 body {
@@ -275,7 +275,7 @@ input {
 }
 .shadow:before,
 .shadow:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0px;
   left: 0px;
@@ -288,7 +288,8 @@ input {
 }
 
 /* WITH BORDER */
-/* .shadow:after {
+/* .shadow:before,
+.shadow:after {
   content: "";
   position: absolute;
   top: -1px;
