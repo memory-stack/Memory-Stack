@@ -56,7 +56,7 @@ All the CLI commands are listed below.
 | logs    | none                      | Lists all the logs you've pushed today.      | mstak logs                                                                  |
 | setbio  | Your desired bio          | Changes your current bio to the desired bio. | mstak bio "A passionate developer from India, trying to make a difference!" |
 
-Format : mstak <command> <input>
+Format : mstak command input
 
 ## Use Cases
 
