@@ -15,11 +15,14 @@ AngularJS-powered HTML5 Markdown editor.
 
 ## Features
 
-- Import a HTML file and watch it magically convert to Markdown
-- Drag and drop images (requires your Dropbox account be linked)
-- Import and save files from GitHub, Dropbox, Google Drive and One Drive
-- Drag and drop markdown and HTML files into Dillinger
-- Export documents as Markdown, HTML and PDF
+Memory Stack is a day to day life event logging platform, which exploits the minimalist customs.
+
+- Explore random events in the life of people across the globe.
+- Start the day by defining your mood.
+- Login, push your logs, monitor log histories, logout all of it from CLI!
+- Minimal user profiles structure.
+- Explore "a moment" in the life of other users or "delve" into their memory stack!
+- mstak log "Emacs sucks!"...its that simple to make a small talk!
 
 ## Installation
 
