@@ -1,10 +1,7 @@
 # Memory Stack
 
-## _The Last Markdown Editor, Ever_
+![Build Status](https://shields.io/badge/build-passing-blueviolet?style=for-the-badge&logo=appveyor) ![NPM Version](https://shields.io/badge/npm-v1.0.0-yellow?style=for-the-badge&logo=appveyor) ![License](https://shields.io/badge/license-MIT-orange?style=for-the-badge&logo=appveyor)
 
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
-
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 📜 Memory stack is a developer oriented, social journaling platform.
 
@@ -24,9 +21,9 @@
 
 ## Installation
 
-Memory Stack requires [Node.js](https://nodejs.org/) v10+ to run.
+Memory Stack requires [Node.js](https://nodejs.org/) to run.
 
-Visit [Memory Stack signup page](https://memorystack.live/signup/) and create an account.
+Visit [Memory stack signup page](https://memorystack.live/signup/) and create an account.
 
 Install the mstak NPM package globally.
 
@@ -69,7 +66,7 @@ This is how to use the web interface of Memory stack
 | ----------------------- | ----------------------------------------------- | ----------------------------------------------------------- |
 | /username               | Displays the logged dates of the specified user | https://www.memorystack.live/void                           |
 | /username/date/logs | Displays the logs of a specified date and user  | https://memorystack.tech/void/14-12-2021/logs |
-| /signup                 | Your log in double quotes                       | https://www.memorystack.live/signup                   |
+| /signup                 | Create an account                      | https://www.memorystack.live/signup                   |
 
 
 ## Tech
