@@ -65,7 +65,7 @@ This is how to use the web interface of Memory stack
 | Endpoint                | Details                                         | Example                                                     |
 | ----------------------- | ----------------------------------------------- | ----------------------------------------------------------- |
 | /username               | Displays the logged dates of the specified user | https://www.memorystack.live/void                           |
-| /username/date/logs | Displays the logs of a specified date and user  | https://memorystack.tech/void/14-12-2021/logs |
+| /username/date/logs | Displays the logs of a specified date and user  | https://memorystack.live/void/14-12-2021/logs |
 | /signup                 | Create an account                      | https://www.memorystack.live/signup                   |
 
 
