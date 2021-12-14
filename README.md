@@ -21,37 +21,11 @@ AngularJS-powered HTML5 Markdown editor.
 - Drag and drop markdown and HTML files into Dillinger
 - Export documents as Markdown, HTML and PDF
 
-## Use Cases
-
-Loren Ipsum need to insert something here
-
-| Endpoint                | Details                                         | Example                                                     |
-| ----------------------- | ----------------------------------------------- | ----------------------------------------------------------- |
-| /username               | Displays the logged dates of the specified user | https://www.memorystack.tech/void                           |
-| /username/datetime/logs | Displays the logs of a specified date and user  | https://memorystack.tech/void/2021-11-18T07:44:39.970Z/logs |
-| /signup                 | Your log in double quotes                       | https://memory-stack.herokuapp.com/signup                   |
-
-Markdown is a lightweight markup language based on the formatting conventions
-that people naturally use in email.
-As [John Gruber] writes on the [Markdown site][df1]
-
-> The overriding design goal for Markdown's
-> formatting syntax is to make it as readable
-> as possible. The idea is that a
-> Markdown-formatted document should be
-> publishable as-is, as plain text, without
-> looking like it's been marked up with tags
-> or formatting instructions.
-
-This text you see here is \*actually- written in Markdown! To get a feel
-for Markdown's syntax, type some text into the left window and
-watch the results in the right.
-
 ## Installation
 
 Memory Stack requires [Node.js](https://nodejs.org/) v10+ to run.
 
-Visit [Memory Stack signup page](https://memorystack.tech/signup/) and create an account.
+Visit [Memory Stack signup page](https://memorystack.live/signup/) and create an account.
 
 Install the mstak NPM package globally.
 
@@ -84,6 +58,34 @@ Format : mstak <command> <input>
 | log     | Your log in double quotes | Push log to the cloud.                       | mstak log "my first log"                                                    |
 | logs    | none                      | Lists all the logs you've pushed today.      | mstak logs                                                                  |
 | setbio  | Your desired bio          | Changes your current bio to the desired bio. | mstak bio "A passionate developer from India, trying to make a difference!" |
+
+## Use Cases
+
+Loren Ipsum need to insert something here
+
+| Endpoint                | Details                                         | Example                                                     |
+| ----------------------- | ----------------------------------------------- | ----------------------------------------------------------- |
+| /username               | Displays the logged dates of the specified user | https://www.memorystack.live/void                           |
+| /username/datetime/logs | Displays the logs of a specified date and user  | https://memorystack.tech/void/2021-11-18T07:44:39.970Z/logs |
+| /signup                 | Your log in double quotes                       | https://www.memorystack.live/signup                   |
+
+Markdown is a lightweight markup language based on the formatting conventions
+that people naturally use in email.
+As [John Gruber] writes on the [Markdown site][df1]
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+This text you see here is \*actually- written in Markdown! To get a feel
+for Markdown's syntax, type some text into the left window and
+watch the results in the right.
+
+
 
 ## Tech
 
