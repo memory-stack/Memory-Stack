@@ -1,54 +1,56 @@
-import Text from '../../components/text/text';
-import socketIOClient from 'socket.io-client';
-import { useState, useEffect, useRef } from 'react';
-import Terminal from 'react-animated-term';
-import { feedActions } from '../../../domain/stores/store';
-import { useSelector, useDispatch } from 'react-redux';
-import Typewriter from 'typewriter-effect';
-import { useHistory } from 'react-router';
-
-//const socket = socketIOClient('https://api-memory-stack.herokuapp.com');
+import Text from "../../components/text/text";
+import socketIOClient from "socket.io-client";
+import { useState, useEffect, useRef } from "react";
+import Terminal from "react-animated-term";
+import { feedActions } from "../../../domain/stores/store";
+import { useSelector, useDispatch } from "react-redux";
+import Typewriter from "typewriter-effect";
+import { useHistory } from "react-router";
+import {
+  SOCKET_ALL_LOGS,
+  SOCKET_LATEST_LOG,
+} from "../../../data/data-source/remote/apiList";
+import { spinner } from "../../../data/data-source/local/constants";
 
 function Homepage(props) {
-  const spinner = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
   const navigator = useHistory();
   const socket = props.socket;
 
   const [values, setValues] = useState({
     liveFeed: {
-      typewriter: '',
+      typewriter: "",
       textWidget: <Text></Text>,
-      username: '',
-      rawDateTime: '',
+      username: "",
+      rawDateTime: "",
     },
     staticFeed: [],
   });
 
-  var liveFeed = values['liveFeed'];
-  var staticFeed = values['staticFeed'];
+  var liveFeed = values["liveFeed"];
+  var staticFeed = values["staticFeed"];
 
   useEffect(() => {
     socket.connect();
 
-    socket.on('recentLogs', (newLogs) => {
+    socket.on(SOCKET_ALL_LOGS, (newLogs) => {
       var tempStaticArray = [];
       for (var i = newLogs.length - 1; i >= 0; i--) {
         const log = newLogs[i];
-        const loggedTime = newLogs[i]['localCreationTime'];
-        const dateArray = newLogs[i]['localCreationDate']
+        const loggedTime = newLogs[i]["localCreationTime"];
+        const dateArray = newLogs[i]["localCreationDate"]
           .slice(0, 10)
-          .split('-');
+          .split("-");
         const loggedDate =
-          dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0];
+          dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
 
         tempStaticArray.push(
           <Text
-            username={log['creator']['username']}
+            username={log["creator"]["username"]}
             type="homeView"
             rawDateTime={loggedDate}
             date={loggedDate}
             time={loggedTime}
-            text={log['logMessage']}
+            text={log["logMessage"]}
             socket={socket}
           ></Text>
         );
@@ -59,33 +61,33 @@ function Homepage(props) {
       });
     });
 
-    socket.on('newLog', (newLog) => {
+    socket.on(SOCKET_LATEST_LOG, (newLog) => {
       var tempLiveArray = [];
 
       const log = newLog;
-      const loggedTime = newLog['localCreationTime'];
-      const dateArray = newLog['localCreationDate'].slice(0, 10).split('-');
-      const loggedDate = dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0];
+      const loggedTime = newLog["localCreationTime"];
+      const dateArray = newLog["localCreationDate"].slice(0, 10).split("-");
+      const loggedDate = dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
 
       tempLiveArray.typewriter = `<a style="color:#ffffff;"><span style="color: #A772FF;">$ ${log[
-        'creator'
-      ]['username'].toLowerCase()}:~</span> ${log[
-        'logMessage'
+        "creator"
+      ]["username"].toLowerCase()}:~</span> ${log[
+        "logMessage"
       ].toUpperCase()}</a>`;
 
       tempLiveArray.textWidget = (
         <Text
-          username={log['creator']['username']}
+          username={log["creator"]["username"]}
           type="homeView"
           rawDateTime={loggedDate}
           date={loggedDate}
           time={loggedTime}
-          text={log['logMessage']}
+          text={log["logMessage"]}
           socket={socket}
         ></Text>
       );
 
-      tempLiveArray.username = log['creator']['username'];
+      tempLiveArray.username = log["creator"]["username"];
       tempLiveArray.rawDateTime = loggedDate;
       console.log(values);
       setValues({
@@ -95,7 +97,7 @@ function Homepage(props) {
     });
 
     return () => {
-      console.log('websocket unmounting!!!!!');
+      console.log("websocket unmounting!!!!!");
       socket.off();
       // socket.disconnect();
     };
@@ -127,17 +129,17 @@ function Homepage(props) {
                 <Terminal
                   lines={[
                     {
-                      text: 'mstak logs',
+                      text: "mstak logs",
                       cmd: true,
                     },
                     {
-                      text: '✔ Loaded logs',
+                      text: "✔ Loaded logs",
                       cmd: false,
                       repeat: true,
                       repeatCount: 5000,
                       frames: spinner.map(function (spinner) {
                         return {
-                          text: spinner + ' Loading logs',
+                          text: spinner + " Loading logs",
                           delay: 40,
                         };
                       }),

@@ -1,27 +1,14 @@
-import { useParams } from 'react-router-dom';
-import Text from '../../components/text/text';
-import { useHistory } from 'react-router-dom';
-import { postRequest } from '../../../data/data-source/remote/apiCall';
-import { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
+import Text from "../../components/text/text";
+import { useHistory } from "react-router-dom";
+import { postRequest } from "../../../data/data-source/remote/apiCall";
+import { useState, useEffect } from "react";
+import { months } from "../../../data/data-source/local/constants";
+import { GET_DAY_LOG } from "../../../data/data-source/remote/apiList";
 
 var feed = [];
 var title;
-var creationDate = '';
-var months = [
-  'JANUARY',
-  'FEBRUARY',
-  'MARCH',
-  'APRIL',
-  'MAY',
-  'JUNE',
-  'JULY',
-  'AUGUST',
-  'SEPTEMBER',
-  'OCTOBER',
-  'NOVEMBER',
-  'DECEMBER',
-];
-// var finishLoading
+
 function Logs() {
   const { username, date } = useParams();
   const navigator = useHistory();
@@ -35,13 +22,13 @@ function Logs() {
   useEffect(() => {
     feed = [];
 
-    postRequest('logView', {
+    postRequest(GET_DAY_LOG, {
       username: username,
-      date: date.replaceAll('-', '/'),
+      date: date.replaceAll("-", "/"),
     }).then((res) => {
-      const dateArray = date.split('-');
+      const dateArray = date.split("-");
       title =
-        months[dateArray[1] - 1] + ' ' + dateArray[0] + 'th, ' + dateArray[2];
+        months[dateArray[1] - 1] + " " + dateArray[0] + "th, " + dateArray[2];
       var logs = res.message.logs;
       for (let log of logs) {
         var message = log.logMessage;
@@ -60,10 +47,10 @@ function Logs() {
   return (
     <div className="body">
       <p className="headingNopadding">
-        {isLoading ? 'LOADING...' : title.toUpperCase()}
+        {isLoading ? "LOADING..." : title.toUpperCase()}
       </p>
       <p className="subHeadline">
-        {'Authored By - '}
+        {"Authored By - "}
         <span className="link" onClick={handleUsernameClick}>
           {username.toUpperCase()}
         </span>

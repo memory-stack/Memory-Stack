@@ -1,23 +1,13 @@
 import axios from "axios";
+var URI = "https://api-memory-stack.herokuapp.com/api/";
 
-export async function postRequest(URI, params) {
-  var response = await axios.post(
-    `https://api-memory-stack.herokuapp.com/api/${URI}`,
-    params
-  );
+export async function postRequest(endpoint, params) {
+  var response = await axios.post(`${URI}${endpoint}`, params);
   return response.data;
 }
 
-export async function postRequestLocal(URI, params) {
-  var toReturn = await axios.post(URI, params);
-
-  return toReturn.data;
-}
-
-export async function getRequest(URI) {
-  const response = await axios.get(
-    `https://api-memory-stack.herokuapp.com/api/${URI}`
-  );
+export async function getRequest(endpoint) {
+  const response = await axios.get(`${URI}${endpoint}`);
 
   return response.data;
 }

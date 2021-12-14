@@ -1,28 +1,11 @@
-import { useParams } from 'react-router-dom';
-import Text from '../../components/text/text';
-import { useEffect, useState } from 'react';
-import {
-  getRequest,
-  postRequest,
-} from '../../../data/data-source/remote/apiCall';
+import { useParams } from "react-router-dom";
+import Text from "../../components/text/text";
+import { useEffect, useState } from "react";
+import { getRequest } from "../../../data/data-source/remote/apiCall";
+import { months } from "../../../data/data-source/local/constants";
 
 var feed = [],
-  bio = '';
-
-var months = [
-  'JANUARY',
-  'FEBRUARY',
-  'MARCH',
-  'APRIL',
-  'MAY',
-  'JUNE',
-  'JULY',
-  'AUGUST',
-  'SEPTEMBER',
-  'OCTOBER',
-  'NOVEMBER',
-  'DECEMBER',
-];
+  bio = "";
 
 function Profile() {
   const { username } = useParams();
@@ -37,13 +20,13 @@ function Profile() {
       loggedDates.reverse();
       console.log(loggedDates);
       for (let loggedDate of loggedDates) {
-        const dateArray = loggedDate.split('/');
+        const dateArray = loggedDate.split("/");
         const date =
-          months[dateArray[1] - 1] + ' ' + dateArray[0] + 'th, ' + dateArray[2];
+          months[dateArray[1] - 1] + " " + dateArray[0] + "th, " + dateArray[2];
         feed.push(
           <Text
             type="profileView"
-            rawDateTime={loggedDate.replaceAll('/', '-')}
+            rawDateTime={loggedDate.replaceAll("/", "-")}
             username={username}
             date={date}
             time=""
@@ -60,7 +43,7 @@ function Profile() {
       <p className="heading">
         Memories of <span>{username.toUpperCase()}</span>
       </p>
-      <p className="subHeadline">{isLoading ? 'LOADING...' : bio}</p>
+      <p className="subHeadline">{isLoading ? "LOADING..." : bio}</p>
       {isLoading ? (
         <p className="heading">LOADING...</p>
       ) : (
