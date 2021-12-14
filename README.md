@@ -50,7 +50,6 @@ mstak log "this is my very first log"
 
 Memory stack's CLI is used to log your thoughts on to the web.
 All the CLI commands are listed below.
-Format : mstak <command> <input>
 
 | Command | Input                     | Details                                      | Demo                                                                        |
 | ------- | ------------------------- | -------------------------------------------- | --------------------------------------------------------------------------- |
@@ -60,6 +59,8 @@ Format : mstak <command> <input>
 | logs    | none                      | Lists all the logs you've pushed today.      | mstak logs                                                                  |
 | setbio  | Your desired bio          | Changes your current bio to the desired bio. | mstak bio "A passionate developer from India, trying to make a difference!" |
 
+Format : mstak <command> <input>
+
 ## Use Cases
 
 This is how to use the web interface of Memory stack
@@ -67,7 +68,7 @@ This is how to use the web interface of Memory stack
 | Endpoint                | Details                                         | Example                                                     |
 | ----------------------- | ----------------------------------------------- | ----------------------------------------------------------- |
 | /username               | Displays the logged dates of the specified user | https://www.memorystack.live/void                           |
-| /username/datetime/logs | Displays the logs of a specified date and user  | https://memorystack.tech/void/14-12-2021/logs |
+| /username/date/logs | Displays the logs of a specified date and user  | https://memorystack.tech/void/14-12-2021/logs |
 | /signup                 | Your log in double quotes                       | https://www.memorystack.live/signup                   |
 
 
@@ -83,8 +84,8 @@ Memory Stack uses a number of open source projects to work properly:
 
 Memory stack is just an infant right now. We need you to make it something big. 
 
-<a href="https://github.com/memory-stack/frontend/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=memory-stack/frontend" />
+<a href="https://github.com/memory-stack/memory-stack/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=memory-stack/memory-stack" />
 </a>
 
 Made with [contrib.rocks](https://contrib.rocks).
