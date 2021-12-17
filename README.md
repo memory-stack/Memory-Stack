@@ -11,8 +11,8 @@
 - ✨Magic ✨
  
 ## Video Explaination
--    [What is Memory stack](https://youtu.be/4H2HqpAkWik)
--    [How to install & use Memory stack](https://youtu.be/e7ZlCBy50lw)
+-    [What is Memory stack?](https://youtu.be/4H2HqpAkWik)
+-    [How to install & use Memory stack?](https://youtu.be/e7ZlCBy50lw)
 
 ## Features
 
