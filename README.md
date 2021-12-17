@@ -21,27 +21,35 @@
 
 ## Installation
 
-Memory Stack requires [Node.js](https://nodejs.org/) to run.
+1. Memory Stack requires [Node.js](https://nodejs.org/) to run.
 
-Visit [Memory stack signup page](https://memorystack.live/signup/) and create an account.
+2. Visit [Memory stack signup page](https://memorystack.live/signup/) and create an account.
 
-Install the mstak NPM package globally.
+3. Install the mstak NPM package globally.
 
-```sh
-npm install -g mstak
-```
+    ```sh
+    npm install -g mstak
+    ```
+    If you encounter error
+    ```sh
+    sudo npm install -g mstak
+    ```
+    If you encounter error
+    ```sh
+    sudo npm install -g mstak --unsafe
+    ```
 
-Login into the mstak CLI application using the credentials created above.
+4. Login into the mstak CLI application using the credentials created above.
 
-```sh
-mstak login
-```
+    ```sh
+    mstak login
+    ```
 
-Push your first log.
+5. Push your first log.
 
-```sh
-mstak log "this is my very first log"
-```
+    ```sh
+    mstak log "this is my very first log"
+    ```
 
 ## Commands
 
