@@ -9,6 +9,10 @@
 - Log your thought
 - See your log being read by the world
 - ✨Magic ✨
+ 
+## Video Explaination
+-    [What is Memory stack](https://youtu.be/4H2HqpAkWik)
+-    [How to install & use Memory stack](https://youtu.be/e7ZlCBy50lw)
 
 ## Features
 
@@ -30,11 +34,11 @@
     ```sh
     npm install -g mstak
     ```
-    If you encounter error
+    If the above command gives error
     ```sh
     sudo npm install -g mstak
     ```
-    If you encounter error
+    If the above two commands give error
     ```sh
     sudo npm install -g mstak --unsafe
     ```
