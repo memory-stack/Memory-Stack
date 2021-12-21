@@ -6,8 +6,8 @@ import socketIOClient from "socket.io-client";
 
 function App() {
   const isLoading = useSelector((state) => state.loaderReducer.isLoading);
-  const socket = socketIOClient("https://api-memory-stack.herokuapp.com");
-  socket.connect();
+  // const socket = socketIOClient("https://api-memory-stack.herokuapp.com");
+  // socket.connect();
 
   return (
     <article>
