@@ -2,10 +2,10 @@ import "./App.css";
 import Routes from "./presentation/routes/routes";
 import { useSelector } from "react-redux";
 import Navbar from "./presentation/components/navbar/navbar";
-import socketIOClient from "socket.io-client";
+// import socketIOClient from "socket.io-client";
 
 function App() {
-  const isLoading = useSelector((state) => state.loaderReducer.isLoading);
+  // const isLoading = useSelector((state) => state.loaderReducer.isLoading);
   // const socket = socketIOClient("https://api-memory-stack.herokuapp.com");
   // socket.connect();
 
