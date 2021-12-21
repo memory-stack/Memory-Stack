@@ -99,7 +99,7 @@ function Homepage(props) {
     return () => {
       console.log("websocket unmounting!!!!!");
       socket.off();
-      // socket.disconnect();
+      socket.disconnect();
     };
   }, [liveFeed, staticFeed, values]);
 
