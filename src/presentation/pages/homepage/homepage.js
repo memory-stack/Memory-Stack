@@ -30,9 +30,10 @@ function Homepage(props) {
   var staticFeed = values["staticFeed"];
 
   useEffect(() => {
-    socket.connect();
+    console.log("socket has connected");
 
     socket.on(SOCKET_ALL_LOGS, (newLogs) => {
+      console.log("socket is in all logs");
       var tempStaticArray = [];
       for (var i = newLogs.length - 1; i >= 0; i--) {
         const log = newLogs[i];
@@ -62,6 +63,8 @@ function Homepage(props) {
     });
 
     socket.on(SOCKET_LATEST_LOG, (newLog) => {
+      console.log("socket is in newwwwww logs");
+
       var tempLiveArray = [];
 
       const log = newLog;
@@ -99,7 +102,7 @@ function Homepage(props) {
     return () => {
       console.log("websocket unmounting!!!!!");
       socket.off();
-      socket.disconnect();
+      // socket.disconnect();
     };
   }, [liveFeed, staticFeed, values]);
 
