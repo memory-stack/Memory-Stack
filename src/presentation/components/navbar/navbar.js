@@ -1,11 +1,9 @@
-import { useHistory } from 'react-router';
-import { HOME_PAGE_ROUTE, SIGNUP_PAGE_ROUTE } from '../../routes/route-paths';
+import { useHistory } from "react-router";
+import { HOME_PAGE_ROUTE, SIGNUP_PAGE_ROUTE } from "../../routes/route-paths";
 
 function Navbar(props) {
-  const socket = props.socket;
   const navigator = useHistory();
   function handleSignup() {
-    socket.disconnect();
     navigator.push(SIGNUP_PAGE_ROUTE);
   }
 

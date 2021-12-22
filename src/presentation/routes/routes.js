@@ -1,10 +1,10 @@
-import { Route, Switch } from 'react-router';
-import Homepage from '../pages/homepage/homepage';
-import Logs from '../pages/logs/logs';
-import Profile from '../pages/profile/profile';
-import Signup from '../pages/signup/signup';
-import Success from '../pages/success/success';
-import VSuccess from '../pages/verificationSuccess/verificationSuccess';
+import { Route, Switch } from "react-router";
+import Homepage from "../pages/homepage/homepage";
+import Logs from "../pages/logs/logs";
+import Profile from "../pages/profile/profile";
+import Signup from "../pages/signup/signup";
+import Success from "../pages/success/success";
+import VSuccess from "../pages/verificationSuccess/verificationSuccess";
 import {
   HOME_PAGE_ROUTE,
   SIGNUP_PAGE_ROUTE,
@@ -12,10 +12,9 @@ import {
   LOGS_PAGE_ROUTE,
   SIGNUP_SUCCESS_PAGE_ROUTE,
   VERIFICATION_SUCCESS_PAGE_ROUTE,
-} from './route-paths';
+} from "./route-paths";
 
 function Routes(props) {
-  const socket = props.socket;
   return (
     <Switch>
       <Route path={VERIFICATION_SUCCESS_PAGE_ROUTE}>
@@ -39,7 +38,7 @@ function Routes(props) {
       </Route>
 
       <Route path={HOME_PAGE_ROUTE}>
-        <Homepage socket={socket} />
+        <Homepage />
       </Route>
     </Switch>
   );
