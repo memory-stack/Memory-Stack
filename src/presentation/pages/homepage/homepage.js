@@ -7,15 +7,15 @@ import { useSelector, useDispatch } from "react-redux";
 import Typewriter from "typewriter-effect";
 import { useHistory } from "react-router";
 import {
-  SOCKET_ALL_LOGS,
-  SOCKET_LATEST_LOG,
+  GET_ALL_LOGS,
+  GET_LATEST_LOG,
 } from "../../../data/data-source/remote/apiList";
 import { spinner } from "../../../data/data-source/local/constants";
+import { getRequest } from "../../../data/data-source/remote/apiCall";
 
 function Homepage(props) {
+  const sse = props.sse;
   const navigator = useHistory();
-  const socket = props.socket;
-
   const [values, setValues] = useState({
     liveFeed: {
       typewriter: "",
@@ -30,9 +30,14 @@ function Homepage(props) {
   var staticFeed = values["staticFeed"];
 
   useEffect(() => {
-    console.log("socket has connected");
+    console.log("***************connectino done***************");
+    const sse = new EventSource(
+      "https://api-memory-stack.herokuapp.com/logStream"
+    );
 
-    socket.on(SOCKET_ALL_LOGS, (newLogs) => {
+    getRequest(GET_ALL_LOGS).then((res) => {
+      var newLogs = res.message;
+
       console.log("socket is in all logs");
       var tempStaticArray = [];
       for (var i = newLogs.length - 1; i >= 0; i--) {
@@ -52,59 +57,73 @@ function Homepage(props) {
             date={loggedDate}
             time={loggedTime}
             text={log["logMessage"]}
-            socket={socket}
           ></Text>
         );
       }
       setValues({
-        ...values,
+        liveFeed: values["liveFeed"],
         staticFeed: tempStaticArray,
       });
     });
 
-    socket.on(SOCKET_LATEST_LOG, (newLog) => {
-      console.log("socket is in newwwwww logs");
+    sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
+    // sse.onerror = (e) => {
+    //   // sse.close();
+    //   const browserUrl = window.location.href;
+    //   // if (
+    //   //   browserUrl == "http://localhost:3000/" ||
+    //   //   browserUrl == "https://memorystack.live"
+    //   // )
+    //   //   alert(
+    //   //     "Some browser extension is preventing realtime updation of logs. Try incognito mode or refresh the page."
+    //   //   );
 
-      var tempLiveArray = [];
-
-      const log = newLog;
-      const loggedTime = newLog["localCreationTime"];
-      const dateArray = newLog["localCreationDate"].slice(0, 10).split("-");
-      const loggedDate = dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
-
-      tempLiveArray.typewriter = `<a style="color:#ffffff;"><span style="color: #A772FF;">$ ${log[
-        "creator"
-      ]["username"].toLowerCase()}:~</span> ${log[
-        "logMessage"
-      ].toUpperCase()}</a>`;
-
-      tempLiveArray.textWidget = (
-        <Text
-          username={log["creator"]["username"]}
-          type="homeView"
-          rawDateTime={loggedDate}
-          date={loggedDate}
-          time={loggedTime}
-          text={log["logMessage"]}
-          socket={socket}
-        ></Text>
-      );
-
-      tempLiveArray.username = log["creator"]["username"];
-      tempLiveArray.rawDateTime = loggedDate;
-      console.log(values);
-      setValues({
-        staticFeed: [liveFeed.textWidget, ...staticFeed],
-        liveFeed: tempLiveArray,
-      });
-    });
-
+    //   console.log(e);
+    // };
     return () => {
-      console.log("websocket unmounting!!!!!");
-      socket.off();
-      // socket.disconnect();
+      sse.close();
     };
-  }, [liveFeed, staticFeed, values]);
+  }, []);
+
+  function getRealtimeData(newLog) {
+    console.log(newLog);
+    var tempLiveArray = {
+      typewriter: "",
+      textWidget: <Text></Text>,
+      username: "",
+      rawDateTime: "",
+    };
+    const log = newLog;
+    const loggedTime = newLog["localCreationTime"];
+    const dateArray = newLog["localCreationDate"].slice(0, 10).split("-");
+    const loggedDate = dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
+
+    tempLiveArray.typewriter = `<a style="color:#ffffff;"><span style="color: #A772FF;">$ ${log[
+      "creator"
+    ]["username"].toLowerCase()}:~</span> ${log[
+      "logMessage"
+    ].toUpperCase()}</a>`;
+
+    tempLiveArray.textWidget = (
+      <Text
+        username={log["creator"]["username"]}
+        type="homeView"
+        rawDateTime={loggedDate}
+        date={loggedDate}
+        time={loggedTime}
+        text={log["logMessage"]}
+      ></Text>
+    );
+
+    tempLiveArray.username = log["creator"]["username"];
+    tempLiveArray.rawDateTime = loggedDate;
+
+    console.log(values["staticFeed"]);
+    setValues({
+      staticFeed: [liveFeed.textWidget, ...staticFeed],
+      liveFeed: tempLiveArray,
+    });
+  }
 
   return (
     <div>
@@ -154,7 +173,7 @@ function Homepage(props) {
 
               <div
                 onClick={() => {
-                  socket.disconnect();
+                  sse.close();
                   navigator.push(
                     `/${liveFeed.username}/${liveFeed.rawDateTime}/logs`
                   );

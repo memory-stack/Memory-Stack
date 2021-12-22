@@ -1,5 +1,6 @@
 import axios from "axios";
 var URI = "https://api-memory-stack.herokuapp.com/api/";
+// var URI = "http://192.168.0.106:3000/api/";
 
 export async function postRequest(endpoint, params) {
   var response = await axios.post(`${URI}${endpoint}`, params);
