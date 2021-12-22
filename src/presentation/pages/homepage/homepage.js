@@ -1,15 +1,9 @@
 import Text from "../../components/text/text";
-import socketIOClient from "socket.io-client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Terminal from "react-animated-term";
-import { feedActions } from "../../../domain/stores/store";
-import { useSelector, useDispatch } from "react-redux";
 import Typewriter from "typewriter-effect";
 import { useHistory } from "react-router";
-import {
-  GET_ALL_LOGS,
-  GET_LATEST_LOG,
-} from "../../../data/data-source/remote/apiList";
+import { GET_ALL_LOGS } from "../../../data/data-source/remote/apiList";
 import { spinner } from "../../../data/data-source/local/constants";
 import { getRequest } from "../../../data/data-source/remote/apiCall";
 
@@ -27,10 +21,8 @@ function Homepage(props) {
 
   var liveFeed = values["liveFeed"];
   var staticFeed = values["staticFeed"];
-  // console.log(staticFeed);
 
   useEffect(() => {
-    console.log("***************connectino done***************");
     const sse = new EventSource(
       "https://api-memory-stack.herokuapp.com/logStream"
     );
@@ -70,19 +62,9 @@ function Homepage(props) {
     });
 
     sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
-    // sse.onerror = (e) => {
-    //   // sse.close();
-    //   const browserUrl = window.location.href;
-    //   // if (
-    //   //   browserUrl == "http://localhost:3000/" ||
-    //   //   browserUrl == "https://memorystack.live"
-    //   // )
-    //   //   alert(
-    //   //     "Some browser extension is preventing realtime updation of logs. Try incognito mode or refresh the page."
-    //   //   );
-
-    //   console.log(e);
-    // };
+    sse.onerror = (e) => {
+      console.log(e);
+    };
     return () => {
       sse.close();
     };
@@ -119,18 +101,11 @@ function Homepage(props) {
       ></Text>
     );
 
-    console.log(log["_id"]);
-
     tempLiveArray.username = log["creator"]["username"];
     tempLiveArray.rawDateTime = loggedDate;
 
-    // setValues({
-    //   staticFeed: [liveFeed.textWidget, ...values.staticFeed],
-    //   liveFeed: tempLiveArray,
-    // });
-
     setValues((prevValue) => ({
-      staticFeed: [liveFeed.textWidget, ...prevValue.staticFeed],
+      staticFeed: [prevValue.liveFeed.textWidget, prevValue.staticFeed],
       liveFeed: tempLiveArray,
     }));
   }
@@ -200,8 +175,7 @@ function Homepage(props) {
                 )}
               </div>
 
-              {/* {staticFeed} */}
-              {values.staticFeed.map((some) => some)}
+              {staticFeed}
             </div>
           </div>
         </div>
