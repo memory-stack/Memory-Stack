@@ -2,10 +2,8 @@ import { useHistory } from "react-router";
 import { HOME_PAGE_ROUTE, SIGNUP_PAGE_ROUTE } from "../../routes/route-paths";
 
 function Navbar(props) {
-  const sse = props.sse;
   const navigator = useHistory();
   function handleSignup() {
-    sse.close();
     navigator.push(SIGNUP_PAGE_ROUTE);
   }
 

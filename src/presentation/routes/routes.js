@@ -15,7 +15,6 @@ import {
 } from "./route-paths";
 
 function Routes(props) {
-  const sse = props.sse;
   return (
     <Switch>
       <Route path={VERIFICATION_SUCCESS_PAGE_ROUTE}>
@@ -39,7 +38,7 @@ function Routes(props) {
       </Route>
 
       <Route path={HOME_PAGE_ROUTE}>
-        <Homepage sse={sse} />
+        <Homepage />
       </Route>
     </Switch>
   );

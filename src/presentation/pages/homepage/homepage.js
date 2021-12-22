@@ -14,7 +14,6 @@ import { spinner } from "../../../data/data-source/local/constants";
 import { getRequest } from "../../../data/data-source/remote/apiCall";
 
 function Homepage(props) {
-  const sse = props.sse;
   const navigator = useHistory();
   const [values, setValues] = useState({
     liveFeed: {
@@ -28,6 +27,7 @@ function Homepage(props) {
 
   var liveFeed = values["liveFeed"];
   var staticFeed = values["staticFeed"];
+  // console.log(staticFeed);
 
   useEffect(() => {
     console.log("***************connectino done***************");
@@ -37,6 +37,7 @@ function Homepage(props) {
 
     getRequest(GET_ALL_LOGS).then((res) => {
       var newLogs = res.message;
+      console.log(res.message);
 
       console.log("socket is in all logs");
       var tempStaticArray = [];
@@ -51,6 +52,7 @@ function Homepage(props) {
 
         tempStaticArray.push(
           <Text
+            key={log["_id"]}
             username={log["creator"]["username"]}
             type="homeView"
             rawDateTime={loggedDate}
@@ -59,9 +61,10 @@ function Homepage(props) {
             text={log["logMessage"]}
           ></Text>
         );
+        // console.log(loggedTime + log["creator"]["username"]);
       }
       setValues({
-        liveFeed: values["liveFeed"],
+        ...values,
         staticFeed: tempStaticArray,
       });
     });
@@ -106,6 +109,7 @@ function Homepage(props) {
 
     tempLiveArray.textWidget = (
       <Text
+        key={log["_id"]}
         username={log["creator"]["username"]}
         type="homeView"
         rawDateTime={loggedDate}
@@ -115,14 +119,20 @@ function Homepage(props) {
       ></Text>
     );
 
+    console.log(log["_id"]);
+
     tempLiveArray.username = log["creator"]["username"];
     tempLiveArray.rawDateTime = loggedDate;
 
-    console.log(values["staticFeed"]);
-    setValues({
-      staticFeed: [liveFeed.textWidget, ...staticFeed],
+    // setValues({
+    //   staticFeed: [liveFeed.textWidget, ...values.staticFeed],
+    //   liveFeed: tempLiveArray,
+    // });
+
+    setValues((prevValue) => ({
+      staticFeed: [liveFeed.textWidget, ...prevValue.staticFeed],
       liveFeed: tempLiveArray,
-    });
+    }));
   }
 
   return (
@@ -173,7 +183,6 @@ function Homepage(props) {
 
               <div
                 onClick={() => {
-                  sse.close();
                   navigator.push(
                     `/${liveFeed.username}/${liveFeed.rawDateTime}/logs`
                   );
@@ -191,7 +200,8 @@ function Homepage(props) {
                 )}
               </div>
 
-              {staticFeed}
+              {/* {staticFeed} */}
+              {values.staticFeed.map((some) => some)}
             </div>
           </div>
         </div>
