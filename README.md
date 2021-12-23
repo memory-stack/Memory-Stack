@@ -1,6 +1,6 @@
 # Memory Stack
 
-[![Build Status](https://shields.io/badge/build-passing-blueviolet?style=for-the-badge&logo=appveyor)](https://github.com/memory-stack/Memory-Stack/releases) [![NPM Version](https://shields.io/badge/npm-v1.0.0-yellow?style=for-the-badge&logo=appveyor)](https://www.npmjs.com/package/mstak) [![License](https://shields.io/badge/license-MIT-orange?style=for-the-badge&logo=appveyor)](https://opensource.org/licenses/MIT)
+[![Build Status](https://shields.io/badge/build-passing-blueviolet?style=for-the-badge&logo=appveyor)](https://github.com/memory-stack/Memory-Stack/releases) [![NPM Version](https://shields.io/badge/npm-v2.0.1-yellow?style=for-the-badge&logo=appveyor)](https://www.npmjs.com/package/mstak) [![License](https://shields.io/badge/license-MIT-orange?style=for-the-badge&logo=appveyor)](https://opensource.org/licenses/MIT)
 
 
 📜 Memory stack is a developer oriented, social journaling platform.
@@ -9,6 +9,10 @@
 - Log your thought
 - See your log being read by the world
 - ✨Magic ✨
+ 
+## Video Explaination
+-    [What is Memory stack?](https://youtu.be/4H2HqpAkWik)
+-    [How to install & use Memory stack?](https://youtu.be/e7ZlCBy50lw)
 
 ## Features
 
@@ -21,27 +25,35 @@
 
 ## Installation
 
-Memory Stack requires [Node.js](https://nodejs.org/) to run.
+1. Memory Stack requires [Node.js](https://nodejs.org/) to run.
 
-Visit [Memory stack signup page](https://memorystack.live/signup/) and create an account.
+2. Visit [Memory stack signup page](https://memorystack.live/signup/) and create an account.
 
-Install the mstak NPM package globally.
+3. Install the mstak NPM package globally.
 
-```sh
-npm install -g mstak
-```
+    ```sh
+    npm install -g mstak
+    ```
+    If the above command gives error
+    ```sh
+    sudo npm install -g mstak
+    ```
+    If the above two commands give error
+    ```sh
+    sudo npm install -g mstak --unsafe
+    ```
 
-Login into the mstak CLI application using the credentials created above.
+4. Login into the mstak CLI application using the credentials created above.
 
-```sh
-mstak login
-```
+    ```sh
+    mstak login
+    ```
 
-Push your first log.
+5. Push your first log.
 
-```sh
-mstak log "this is my very first log"
-```
+    ```sh
+    mstak log "this is my very first log"
+    ```
 
 ## Commands
 
@@ -65,7 +77,7 @@ This is how to use the web interface of Memory stack
 | Endpoint                | Details                                         | Example                                                     |
 | ----------------------- | ----------------------------------------------- | ----------------------------------------------------------- |
 | /username               | Displays the logged dates of the specified user | https://www.memorystack.live/void                           |
-| /username/date/logs | Displays the logs of a specified date and user  | https://memorystack.tech/void/14-12-2021/logs |
+| /username/date/logs | Displays the logs of a specified date and user  | https://memorystack.live/void/14-12-2021/logs |
 | /signup                 | Create an account                      | https://www.memorystack.live/signup                   |
 
 

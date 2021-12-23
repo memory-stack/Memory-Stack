@@ -124,7 +124,7 @@ function Homepage(props) {
           style={{ color: "#FF7272", fontSize: "12px" }}
           className="bodyText"
         >
-          Note: Make sure to install the latest npm package v2.0.1. Previous
+          Note: Make sure to install the latest npm package v2.0.2. Previous
           versions are discontinued.
         </a>
 
