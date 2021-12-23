@@ -1,6 +1,6 @@
 # Memory Stack
 
-[![Build Status](https://shields.io/badge/build-passing-blueviolet?style=for-the-badge&logo=appveyor)](https://github.com/memory-stack/Memory-Stack/releases) [![NPM Version](https://shields.io/badge/npm-v2.0.0-yellow?style=for-the-badge&logo=appveyor)](https://www.npmjs.com/package/mstak) [![License](https://shields.io/badge/license-MIT-orange?style=for-the-badge&logo=appveyor)](https://opensource.org/licenses/MIT)
+[![Build Status](https://shields.io/badge/build-passing-blueviolet?style=for-the-badge&logo=appveyor)](https://github.com/memory-stack/Memory-Stack/releases) [![NPM Version](https://shields.io/badge/npm-v2.0.1-yellow?style=for-the-badge&logo=appveyor)](https://www.npmjs.com/package/mstak) [![License](https://shields.io/badge/license-MIT-orange?style=for-the-badge&logo=appveyor)](https://opensource.org/licenses/MIT)
 
 
 📜 Memory stack is a developer oriented, social journaling platform.
