@@ -23,15 +23,12 @@ function Homepage(props) {
   var staticFeed = values["staticFeed"];
 
   useEffect(() => {
-    const sse = new EventSource(
-      "https://api-memory-stack.herokuapp.com/logStream"
-    );
+    const sse = new EventSource("https://mstak.tech/logStream");
 
     getRequest(GET_ALL_LOGS).then((res) => {
       var newLogs = res.message;
       console.log(res.message);
 
-      console.log("socket is in all logs");
       var tempStaticArray = [];
       for (var i = newLogs.length - 1; i >= 0; i--) {
         const log = newLogs[i];
@@ -121,6 +118,15 @@ function Homepage(props) {
           epiphanies, your portal to unfold phenomenal future possibilities as
           you constantly log your present moves with Memory Stack.
         </p>
+        <a
+          href="https://www.npmjs.com/package/mstak"
+          target="_blank"
+          style={{ color: "#FF7272", fontSize: "12px" }}
+          className="bodyText"
+        >
+          Note: Make sure to install the latest npm package v2.0.1. Previous
+          versions are discontinued.
+        </a>
 
         <div className="shadow">
           <div className="terminalBox">
