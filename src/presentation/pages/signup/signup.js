@@ -16,6 +16,7 @@ function Signup() {
   const [isUsernameBlank, setUsernameBlank] = useState(true);
   const [isUsernameLoading, setUsernameLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   let handleUsernameChange = async () => {
     setUsernameLoading(true);
@@ -34,6 +35,7 @@ function Signup() {
   }
 
   async function handleSignup(e) {
+    setIsButtonDisabled(true);
     setErrorMessage("");
     e.preventDefault();
     var username = document.getElementById("usernameField").value;
@@ -97,7 +99,9 @@ function Signup() {
         />
         <button
           className={
-            isUsernameBlank
+            isButtonDisabled
+              ? "disabledButton"
+              : isUsernameBlank
               ? "button"
               : isUsernameLoading
               ? "disabledButton"
@@ -106,7 +110,9 @@ function Signup() {
               : "disabledButton"
           }
           disabled={
-            isUsernameBlank
+            isButtonDisabled
+              ? true
+              : isUsernameBlank
               ? false
               : isUsernameLoading
               ? true
