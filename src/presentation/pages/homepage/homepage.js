@@ -1,29 +1,29 @@
-import Text from '../../components/text/text';
-import { useState, useEffect } from 'react';
-import Terminal from 'react-animated-term';
-import Typewriter from 'typewriter-effect';
-import { useHistory } from 'react-router';
-import { GET_ALL_LOGS } from '../../../data/data-source/remote/apiList';
-import { spinner } from '../../../data/data-source/local/constants';
-import { getRequest } from '../../../data/data-source/remote/apiCall';
+import Text from "../../components/text/text";
+import { useState, useEffect } from "react";
+import Terminal from "react-animated-term";
+import Typewriter from "typewriter-effect";
+import { useHistory } from "react-router";
+import { GET_ALL_LOGS } from "../../../data/data-source/remote/apiList";
+import { spinner } from "../../../data/data-source/local/constants";
+import { getRequest } from "../../../data/data-source/remote/apiCall";
 
 function Homepage(props) {
   const navigator = useHistory();
   const [values, setValues] = useState({
     liveFeed: {
-      typewriter: '',
+      typewriter: "",
       textWidget: <Text></Text>,
-      username: '',
-      rawDateTime: '',
+      username: "",
+      rawDateTime: "",
     },
     staticFeed: [],
   });
 
-  var liveFeed = values['liveFeed'];
-  var staticFeed = values['staticFeed'];
+  var liveFeed = values["liveFeed"];
+  var staticFeed = values["staticFeed"];
 
   useEffect(() => {
-    const sse = new EventSource('https://mstak.tech/logStream');
+    const sse = new EventSource("https://mstak.tech/logStream");
 
     getRequest(GET_ALL_LOGS).then((res) => {
       var newLogs = res.message;
@@ -32,22 +32,22 @@ function Homepage(props) {
       var tempStaticArray = [];
       for (var i = newLogs.length - 1; i >= 0; i--) {
         const log = newLogs[i];
-        const loggedTime = newLogs[i]['localCreationTime'];
-        const dateArray = newLogs[i]['localCreationDate']
+        const loggedTime = newLogs[i]["localCreationTime"];
+        const dateArray = newLogs[i]["localCreationDate"]
           .slice(0, 10)
-          .split('-');
+          .split("-");
         const loggedDate =
-          dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0];
+          dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
 
         tempStaticArray.push(
           <Text
-            key={log['_id']}
-            username={log['creator']['username']}
+            key={log["_id"]}
+            username={log["creator"]["username"]}
             type="homeView"
             rawDateTime={loggedDate}
             date={loggedDate}
             time={loggedTime}
-            text={log['logMessage']}
+            text={log["logMessage"]}
           ></Text>
         );
         // console.log(loggedTime + log["creator"]["username"]);
@@ -61,6 +61,7 @@ function Homepage(props) {
     sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
     sse.onerror = (e) => {
       console.log(e);
+      sse.close();
     };
     return () => {
       sse.close();
@@ -70,35 +71,35 @@ function Homepage(props) {
   function getRealtimeData(newLog) {
     console.log(newLog);
     var tempLiveArray = {
-      typewriter: '',
+      typewriter: "",
       textWidget: <Text></Text>,
-      username: '',
-      rawDateTime: '',
+      username: "",
+      rawDateTime: "",
     };
     const log = newLog;
-    const loggedTime = newLog['localCreationTime'];
-    const dateArray = newLog['localCreationDate'].slice(0, 10).split('-');
-    const loggedDate = dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0];
+    const loggedTime = newLog["localCreationTime"];
+    const dateArray = newLog["localCreationDate"].slice(0, 10).split("-");
+    const loggedDate = dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
 
     tempLiveArray.typewriter = `<a style="color:#ffffff;"><span style="color: #A772FF;">$ ${log[
-      'creator'
-    ]['username'].toLowerCase()}:~</span> ${log[
-      'logMessage'
+      "creator"
+    ]["username"].toLowerCase()}:~</span> ${log[
+      "logMessage"
     ].toUpperCase()}</a>`;
 
     tempLiveArray.textWidget = (
       <Text
-        key={log['_id']}
-        username={log['creator']['username']}
+        key={log["_id"]}
+        username={log["creator"]["username"]}
         type="homeView"
         rawDateTime={loggedDate}
         date={loggedDate}
         time={loggedTime}
-        text={log['logMessage']}
+        text={log["logMessage"]}
       ></Text>
     );
 
-    tempLiveArray.username = log['creator']['username'];
+    tempLiveArray.username = log["creator"]["username"];
     tempLiveArray.rawDateTime = loggedDate;
 
     setValues((prevValue) => ({
@@ -143,17 +144,17 @@ function Homepage(props) {
                 <Terminal
                   lines={[
                     {
-                      text: 'mstak logs',
+                      text: "mstak logs",
                       cmd: true,
                     },
                     {
-                      text: '✔ Loaded logs',
+                      text: "✔ Loaded logs",
                       cmd: false,
                       repeat: true,
                       repeatCount: 5000,
                       frames: spinner.map(function (spinner) {
                         return {
-                          text: spinner + ' Loading logs',
+                          text: spinner + " Loading logs",
                           delay: 40,
                         };
                       }),
