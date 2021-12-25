@@ -16,6 +16,7 @@ export default function usePagination(lastElementInPage) {
     setLoading(true);
     getRequestParams(GET_ALL_LOGS_PAGINATED, {
       lastElementId: lastElementInPage,
+      limit: 30,
     }).then((res) => {
       var lastElementFromServerTemp = res.lastElementId;
       var newLogs = res.message;
