@@ -49,7 +49,7 @@ function Homepage(props) {
     });
   }, [oldFeed]);
   useEffect(() => {
-    const sse = new EventSource("http://mstak.tech/logStream");
+    const sse = new EventSource("https://mstak.tech/logStream");
     sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
     sse.onerror = (e) => {
       console.log(e);
