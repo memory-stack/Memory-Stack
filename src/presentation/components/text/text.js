@@ -9,11 +9,13 @@ function Text(props) {
   const time = props.time;
   const text = props.text;
   const socket = props.socket;
+  const reference = props.reference;
   var toReturn = <p></p>;
 
   if (type == "homeView")
     toReturn = (
       <p
+        ref={reference}
         onClick={() => {
           if (socket != null) socket.disconnect();
           navigator.push(`/${username}/${rawDateTime}/logs`);

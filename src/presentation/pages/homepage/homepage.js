@@ -6,58 +6,50 @@ import { useHistory } from "react-router";
 import { GET_ALL_LOGS } from "../../../data/data-source/remote/apiList";
 import { spinner } from "../../../data/data-source/local/constants";
 import { getRequest } from "../../../data/data-source/remote/apiCall";
+import usePagination from "./usePagination";
+import { useCallback, useRef } from "react";
 
 function Homepage(props) {
   const navigator = useHistory();
+  const [lastElementInPage, setlastElementInPage] = useState("");
   const [values, setValues] = useState({
     liveFeed: {
       typewriter: "",
-      textWidget: <Text></Text>,
+      textWidget: {},
       username: "",
       rawDateTime: "",
     },
     staticFeed: [],
   });
+  const [loading, oldFeed, hasMore, lastElementFromServer] =
+    usePagination(lastElementInPage);
+  const observer = useRef();
+  const lastLogElementReef = useCallback(
+    (node) => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
 
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore && lastElementFromServer != "")
+          setlastElementInPage(lastElementFromServer);
+      });
+      if (node) observer.current.observe(node);
+    },
+    [loading, hasMore]
+  );
   var liveFeed = values["liveFeed"];
-  var staticFeed = values["staticFeed"];
+  var staticFeed = values.staticFeed;
 
   useEffect(() => {
-    const sse = new EventSource("https://mstak.tech/logStream");
-
-    getRequest(GET_ALL_LOGS).then((res) => {
-      var newLogs = res.message;
-      console.log(res.message);
-
-      var tempStaticArray = [];
-      for (var i = newLogs.length - 1; i >= 0; i--) {
-        const log = newLogs[i];
-        const loggedTime = newLogs[i]["localCreationTime"];
-        const dateArray = newLogs[i]["localCreationDate"]
-          .slice(0, 10)
-          .split("-");
-        const loggedDate =
-          dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
-
-        tempStaticArray.push(
-          <Text
-            key={log["_id"]}
-            username={log["creator"]["username"]}
-            type="homeView"
-            rawDateTime={loggedDate}
-            date={loggedDate}
-            time={loggedTime}
-            text={log["logMessage"]}
-          ></Text>
-        );
-        // console.log(loggedTime + log["creator"]["username"]);
-      }
-      setValues({
-        ...values,
-        staticFeed: tempStaticArray,
-      });
+    setValues((prev) => {
+      return {
+        ...prev,
+        staticFeed: [...prev.staticFeed, ...oldFeed],
+      };
     });
-
+  }, [oldFeed]);
+  useEffect(() => {
+    const sse = new EventSource("http://mstak.tech/logStream");
     sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
     sse.onerror = (e) => {
       console.log(e);
@@ -87,25 +79,27 @@ function Homepage(props) {
       "logMessage"
     ].toUpperCase()}</a>`;
 
-    tempLiveArray.textWidget = (
-      <Text
-        key={log["_id"]}
-        username={log["creator"]["username"]}
-        type="homeView"
-        rawDateTime={loggedDate}
-        date={loggedDate}
-        time={loggedTime}
-        text={log["logMessage"]}
-      ></Text>
-    );
+    tempLiveArray.textWidget = {
+      key: log["_id"],
+      username: log["creator"]["username"],
+      type: "homeView",
+      rawDateTime: loggedDate,
+      date: loggedDate,
+      time: loggedTime,
+      text: log["logMessage"],
+    };
 
     tempLiveArray.username = log["creator"]["username"];
     tempLiveArray.rawDateTime = loggedDate;
 
-    setValues((prevValue) => ({
-      staticFeed: [prevValue.liveFeed.textWidget, prevValue.staticFeed],
-      liveFeed: tempLiveArray,
-    }));
+    setValues((prevValue) => {
+      if (prevValue.staticFeed.length != 0) {
+        return {
+          staticFeed: [prevValue.liveFeed.textWidget, ...prevValue.staticFeed],
+          liveFeed: tempLiveArray,
+        };
+      }
+    });
   }
 
   return (
@@ -183,7 +177,57 @@ function Homepage(props) {
                 )}
               </div>
 
-              {staticFeed}
+              {staticFeed.map((log, index) => {
+                if (log.key != null) {
+                  // console.log("***************", log.key, log.text, "********");
+                  if (index + 1 == staticFeed.length) {
+                    return (
+                      <Text
+                        reference={lastLogElementReef}
+                        key={log["key"]}
+                        username={log["username"]}
+                        type={log["type"]}
+                        rawDateTime={log["rawDateTime"]}
+                        date={log["date"]}
+                        time={log["time"]}
+                        text={log["text"]}
+                      ></Text>
+                    );
+                  }
+
+                  return (
+                    <Text
+                      key={log["key"]}
+                      username={log["username"]}
+                      type={log["type"]}
+                      rawDateTime={log["rawDateTime"]}
+                      date={log["date"]}
+                      time={log["time"]}
+                      text={log["text"]}
+                    ></Text>
+                  );
+                }
+              })}
+
+              {loading && staticFeed.length != 0 && (
+                <Terminal
+                  lines={[
+                    {
+                      text: "Loading logs",
+                      cmd: false,
+                      repeat: true,
+                      repeatCount: 5000,
+                      frames: spinner.map(function (spinner) {
+                        return {
+                          text: spinner + " Loading logs",
+                          delay: 40,
+                        };
+                      }),
+                    },
+                  ]}
+                  interval={80}
+                />
+              )}
             </div>
           </div>
         </div>
