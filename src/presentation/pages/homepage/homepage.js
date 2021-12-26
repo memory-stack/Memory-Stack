@@ -3,9 +3,7 @@ import { useState, useEffect } from "react";
 import Terminal from "react-animated-term";
 import Typewriter from "typewriter-effect";
 import { useHistory } from "react-router";
-import { GET_ALL_LOGS } from "../../../data/data-source/remote/apiList";
 import { spinner } from "../../../data/data-source/local/constants";
-import { getRequest } from "../../../data/data-source/remote/apiCall";
 import usePagination from "./usePagination";
 import { useCallback, useRef } from "react";
 
@@ -21,6 +19,8 @@ function Homepage(props) {
     },
     staticFeed: [],
   });
+
+  //Custom hook for pagination
   const [loading, oldFeed, hasMore, lastElementFromServer] =
     usePagination(lastElementInPage);
   const observer = useRef();
@@ -37,9 +37,11 @@ function Homepage(props) {
     },
     [loading, hasMore]
   );
+
   var liveFeed = values["liveFeed"];
   var staticFeed = values.staticFeed;
 
+  //useEffect to merge the existing list with the list obtained from pagination
   useEffect(() => {
     setValues((prev) => {
       return {
@@ -48,6 +50,8 @@ function Homepage(props) {
       };
     });
   }, [oldFeed]);
+
+  //The SSE useEffect
   useEffect(() => {
     const sse = new EventSource("https://mstak.tech/logStream");
     sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
@@ -60,6 +64,7 @@ function Homepage(props) {
     };
   }, []);
 
+  //Function to handle the SSE trigger
   function getRealtimeData(newLog) {
     console.log(newLog);
     var tempLiveArray = {

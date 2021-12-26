@@ -1,7 +1,4 @@
-import {
-  getRequestParams,
-  postRequest,
-} from "../../../data/data-source/remote/apiCall";
+import { getRequestParams } from "../../../data/data-source/remote/apiCall";
 import { GET_ALL_LOGS_PAGINATED } from "../../../data/data-source/remote/apiList";
 import { useEffect } from "react";
 import { useState } from "react";
