@@ -10,11 +10,16 @@ function Text(props) {
   const text = props.text;
   const socket = props.socket;
   const reference = props.reference;
+  const profileViewStyles = { "text-decoration-color": props.accentColor };
+  const accentColor = { color: props.accentColor };
   var toReturn = <p></p>;
+
+  console.log("***********", accentColor, "***********");
 
   if (type == "homeView")
     toReturn = (
       <p
+        style={profileViewStyles}
         ref={reference}
         onClick={() => {
           if (socket != null) socket.disconnect();
@@ -22,12 +27,13 @@ function Text(props) {
         }}
         className="bodyText link"
       >
-        <span>$ {username}:~</span> {text.toUpperCase()}
+        <span style={accentColor}>$ {username}:~</span> {text.toUpperCase()}
       </p>
     );
   else if (type == "profileView")
     toReturn = (
       <p
+        style={profileViewStyles}
         onClick={() => {
           navigator.push(`/${username}/${rawDateTime}/logs`);
         }}
