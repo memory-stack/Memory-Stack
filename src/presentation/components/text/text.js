@@ -14,8 +14,6 @@ function Text(props) {
   const accentColor = { color: props.accentColor };
   var toReturn = <p></p>;
 
-  console.log("***********", accentColor, "***********");
-
   if (type == "homeView")
     toReturn = (
       <p

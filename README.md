@@ -1,6 +1,6 @@
 # Memory Stack
 
-[![Build Status](https://shields.io/badge/build-passing-blueviolet?style=for-the-badge&logo=appveyor)](https://github.com/memory-stack/Memory-Stack/releases) [![NPM Version](https://shields.io/badge/npm-v2.0.2-yellow?style=for-the-badge&logo=appveyor)](https://www.npmjs.com/package/mstak) [![License](https://shields.io/badge/license-MIT-orange?style=for-the-badge&logo=appveyor)](https://opensource.org/licenses/MIT)
+[![Build Status](https://shields.io/badge/build-passing-blueviolet?style=for-the-badge&logo=appveyor)](https://github.com/memory-stack/Memory-Stack/releases) [![NPM Version](https://shields.io/badge/npm-v2.0.3-yellow?style=for-the-badge&logo=appveyor)](https://www.npmjs.com/package/mstak) [![License](https://shields.io/badge/license-MIT-orange?style=for-the-badge&logo=appveyor)](https://opensource.org/licenses/MIT)
 
 
 📜 Memory stack is a developer oriented, social journaling platform.
@@ -66,7 +66,8 @@ All the CLI commands are listed below.
 | logout  | none                      | Logs out the current user.                   | mstak logout                                                                |
 | log     | Your log in double quotes | Push log to the cloud.                       | mstak log "my first log"                                                    |
 | logs    | none                      | Lists all the logs you've pushed today.      | mstak logs                                                                  |
-| setbio  | Your desired bio          | Changes your current bio to the desired bio. | mstak bio "A passionate developer from India, trying to make a difference!" |
+| setbio  | Your desired bio          | Changes your current bio to the desired bio. | mstak setbio "A passionate developer from India, trying to make a difference!" |
+| set color  | none         | Lists different colors to choose from | mstak set color |
 
 Format : mstak command input
 
@@ -76,9 +77,9 @@ This is how to use the web interface of Memory stack
 
 | Endpoint                | Details                                         | Example                                                     |
 | ----------------------- | ----------------------------------------------- | ----------------------------------------------------------- |
-| /username               | Displays the logged dates of the specified user | https://www.memorystack.live/void                           |
+| /username               | Displays the logged dates of the specified user | https://memorystack.live/void                           |
 | /username/date/logs | Displays the logs of a specified date and user  | https://memorystack.live/void/14-12-2021/logs |
-| /signup                 | Create an account                      | https://www.memorystack.live/signup                   |
+| /signup                 | Create an account                      | https://memorystack.live/signupPage                   |
 
 
 ## Tech
@@ -86,7 +87,7 @@ This is how to use the web interface of Memory stack
 Memory Stack uses a number of open source projects to work properly:
 
 - [ReactJS] - HTML enhanced for web apps!
-- [node.js] - evented I/O for the backend & CLI application.
+- [Node.js] - evented I/O for the backend & CLI application.
 - [Express] - fast node.js network app framework [@tjholowaychuk]
 
 ## Contributors

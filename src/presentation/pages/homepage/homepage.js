@@ -3,7 +3,10 @@ import { useState, useEffect } from "react";
 import Terminal from "react-animated-term";
 import Typewriter from "typewriter-effect";
 import { useHistory } from "react-router";
-import { spinner } from "../../../data/data-source/local/constants";
+import {
+  profileColors,
+  spinner,
+} from "../../../data/data-source/local/constants";
 import usePagination from "./usePagination";
 import { useCallback, useRef } from "react";
 
@@ -68,7 +71,7 @@ function Homepage(props) {
   //Function to handle the SSE trigger
   function getRealtimeData(newLog) {
     console.log(newLog);
-    var accentColor;
+    var accentColor = profileColors[newLog.creator.color];
     var tempLiveArray = {
       typewriter: "",
       textWidget: <Text></Text>,
@@ -128,8 +131,7 @@ function Homepage(props) {
           className="homepageWarning"
           rel="noreferrer"
         >
-          Note: Make sure to install the latest npm package v2.0.2. Previous
-          versions are discontinued.
+          Note: Update mstak npm package to set colors.
         </a>
 
         <div className="shadow">

@@ -22,5 +22,4 @@ export const profileColors = {
   blue: "#72FAFF",
   purple: "#A772FF",
   pink: "#FF72A6",
-  white: "#FFFFFF",
 };
