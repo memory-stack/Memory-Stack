@@ -3,13 +3,17 @@ import { useState, useEffect } from "react";
 import Terminal from "react-animated-term";
 import Typewriter from "typewriter-effect";
 import { useHistory } from "react-router";
-import { spinner } from "../../../data/data-source/local/constants";
+import {
+  profileColors,
+  spinner,
+} from "../../../data/data-source/local/constants";
 import usePagination from "./usePagination";
 import { useCallback, useRef } from "react";
 
 function Homepage(props) {
   const navigator = useHistory();
   const [lastElementInPage, setlastElementInPage] = useState("");
+  const [profileAccentColor, setProfileAccentColor] = useState({});
   const [values, setValues] = useState({
     liveFeed: {
       typewriter: "",
@@ -67,6 +71,7 @@ function Homepage(props) {
   //Function to handle the SSE trigger
   function getRealtimeData(newLog) {
     console.log(newLog);
+    var accentColor = profileColors[newLog.creator.color];
     var tempLiveArray = {
       typewriter: "",
       textWidget: <Text></Text>,
@@ -78,7 +83,7 @@ function Homepage(props) {
     const dateArray = newLog["localCreationDate"].slice(0, 10).split("-");
     const loggedDate = dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
 
-    tempLiveArray.typewriter = `<a style="color:#ffffff;"><span style="color: #A772FF;">$ ${log[
+    tempLiveArray.typewriter = `<a style="color:#ffffff;"><span style="color:${accentColor} ;">$ ${log[
       "creator"
     ]["username"].toLowerCase()}:~</span> ${log[
       "logMessage"
@@ -92,6 +97,7 @@ function Homepage(props) {
       date: loggedDate,
       time: loggedTime,
       text: log["logMessage"],
+      accentColor: accentColor,
     };
 
     tempLiveArray.username = log["creator"]["username"];
@@ -125,8 +131,7 @@ function Homepage(props) {
           className="homepageWarning"
           rel="noreferrer"
         >
-          Note: Make sure to install the latest npm package v2.0.2. Previous
-          versions are discontinued.
+          Note: Update mstak npm package to set colors.
         </a>
 
         <div className="shadow">
@@ -184,7 +189,6 @@ function Homepage(props) {
 
               {staticFeed.map((log, index) => {
                 if (log.key != null) {
-                  // console.log("***************", log.key, log.text, "********");
                   if (index + 1 == staticFeed.length) {
                     return (
                       <Text
@@ -196,6 +200,7 @@ function Homepage(props) {
                         date={log["date"]}
                         time={log["time"]}
                         text={log["text"]}
+                        accentColor={log["accentColor"]}
                       ></Text>
                     );
                   }
@@ -209,6 +214,7 @@ function Homepage(props) {
                       date={log["date"]}
                       time={log["time"]}
                       text={log["text"]}
+                      accentColor={log["accentColor"]}
                     ></Text>
                   );
                 }

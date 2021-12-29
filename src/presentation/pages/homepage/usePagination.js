@@ -2,6 +2,7 @@ import { getRequestParams } from "../../../data/data-source/remote/apiCall";
 import { GET_ALL_LOGS_PAGINATED } from "../../../data/data-source/remote/apiList";
 import { useEffect } from "react";
 import { useState } from "react";
+import { profileColors } from "../../../data/data-source/local/constants";
 
 export default function usePagination(lastElementInPage) {
   const [loading, setLoading] = useState(true);
@@ -15,11 +16,13 @@ export default function usePagination(lastElementInPage) {
       lastElementId: lastElementInPage,
       limit: 30,
     }).then((res) => {
+      console.log(res);
       var lastElementFromServerTemp = res.lastElementId;
       var newLogs = res.message;
       var tempStaticArray = [];
       for (var i = 0; i < newLogs.length; i++) {
         const log = newLogs[i];
+        const accentColor = profileColors[log.creator.color];
         const loggedTime = newLogs[i]["localCreationTime"];
         const dateArray = newLogs[i]["localCreationDate"]
           .slice(0, 10)
@@ -35,6 +38,7 @@ export default function usePagination(lastElementInPage) {
           date: loggedDate,
           time: loggedTime,
           text: log["logMessage"],
+          accentColor: accentColor,
         });
         // console.log(log.logMessage);
         // console.log(loggedTime + log["creator"]["username"]);
